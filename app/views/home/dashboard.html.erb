@@ -1,4 +1,74 @@
-<div>
-  <h1 class="font-bold text-4xl">Home#dashboard</h1>
-  <p>Find me in app/views/home/dashboard.html.erb</p>
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="font-bold text-4xl text-center mb-4">ダッシュボード</h1>
+    <p class="text-center text-gray-600 mb-6">ログイン中のメールアドレス：<%= Current.user.email_address if Current.user %></p>
+
+    <div class="text-center mb-6">
+      <p class="text-lg">日付：<%= Time.current.in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d') %></p>
+      <p class="text-lg">時間：<span id="current-time" class="font-mono text-xl"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%H:%M:%S') %></span></p>
+    </div>
+
+    <div class="my-5">
+      <label for="time-input" class="block text-sm font-medium text-gray-700 mb-2">勤務開始時間を入力してください：</label>
+      <div class="flex items-center justify-center">
+        <input type="time" id="time-input" class="mt-1 block w-32 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+        <button id="save-time" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">保存</button>
+      </div>
+      <p class="mt-2 text-center">入力された勤務開始時間：<span id="display-time" class="font-mono">--:--</span></p>
+      <div class="flex items-center justify-center mt-4">
+        <input type="checkbox" id="break-checkbox" class="mr-2">
+        <label for="break-checkbox" class="text-sm font-medium text-gray-700">休憩時間を含める</label>
+      </div>
+      <p class="mt-2 text-center">経過時間：<span id="elapsed-time" class="font-mono">--:--</span></p>
+    </div>
+  </div>
 </div>
+
+<script>
+  function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const currentTime = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('current-time').textContent = currentTime;
+
+    const savedTime = localStorage.getItem('savedTime');
+    if (savedTime) {
+      const [startHours, startMinutes] = savedTime.split(':').map(Number);
+      const startTime = new Date(now);
+      startTime.setHours(startHours, startMinutes, 0, 0);
+
+      let elapsedMilliseconds = now - startTime;
+      const breakCheckbox = document.getElementById('break-checkbox');
+      if (breakCheckbox.checked) {
+        elapsedMilliseconds -= 60 * 60 * 1000; // 1時間を引く
+      }
+
+      const elapsedMinutes = Math.floor(elapsedMilliseconds / (1000 * 60));
+      const elapsedHours = Math.floor(elapsedMinutes / 60);
+      const remainingMinutes = elapsedMinutes % 60;
+      document.getElementById('elapsed-time').textContent = `${elapsedHours}h ${remainingMinutes}m`;
+    }
+  }
+
+  function saveInputTime() {
+    const timeInput = document.getElementById('time-input').value;
+    document.getElementById('display-time').textContent = timeInput;
+    localStorage.setItem('savedTime', timeInput);
+  }
+
+  document.getElementById('save-time').addEventListener('click', saveInputTime);
+
+  setInterval(updateTime, 1000);
+  updateTime(); // 初回実行
+
+  // ページ読み込み時に保存された時間を表示
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTime = localStorage.getItem('savedTime');
+    if (savedTime) {
+      document.getElementById('display-time').textContent = savedTime;
+      document.getElementById('time-input').value = savedTime;
+    }
+  });
+</script>

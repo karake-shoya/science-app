@@ -60,103 +60,103 @@
 </div>
 
 <script>
-  // function updateTime() {
-  //   const now = new Date();
-  //   const hours = String(now.getHours()).padStart(2, '0');
-  //   const minutes = String(now.getMinutes()).padStart(2, '0');
-  //   const seconds = String(now.getSeconds()).padStart(2, '0');
-  //   const currentTime = `${hours}:${minutes}:${seconds}`;
-  //   document.getElementById('current-time').textContent = currentTime;
+  function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const currentTime = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('current-time').textContent = currentTime;
 
-  //   const savedTime = localStorage.getItem('savedTime');
-  //   if (savedTime) {
-  //     const [startHours, startMinutes] = savedTime.split(':').map(Number);
-  //     const startTime = new Date(now);
-  //     startTime.setHours(startHours, startMinutes, 0, 0);
+    const savedTime = localStorage.getItem('savedTime');
+    if (savedTime) {
+      const [startHours, startMinutes] = savedTime.split(':').map(Number);
+      const startTime = new Date(now);
+      startTime.setHours(startHours, startMinutes, 0, 0);
 
-  //     let elapsedMilliseconds = now - startTime;
-  //     const breakCheckbox = document.getElementById('break-checkbox');
-  //     if (breakCheckbox.checked) {
-  //       elapsedMilliseconds -= 60 * 60 * 1000; // 1時間を引く
-  //     }
+      let elapsedMilliseconds = now - startTime;
+      const breakCheckbox = document.getElementById('break-checkbox');
+      if (breakCheckbox.checked) {
+        elapsedMilliseconds -= 60 * 60 * 1000; // 1時間を引く
+      }
 
-  //     const elapsedMinutes = Math.floor(elapsedMilliseconds / (1000 * 60));
-  //     const elapsedHours = Math.floor(elapsedMinutes / 60);
-  //     const remainingMinutes = elapsedMinutes % 60;
-  //     document.getElementById('time-tracked').textContent = `${elapsedHours}h ${remainingMinutes}m`;
-  //   }
-  // }
+      const elapsedMinutes = Math.floor(elapsedMilliseconds / (1000 * 60));
+      const elapsedHours = Math.floor(elapsedMinutes / 60);
+      const remainingMinutes = elapsedMinutes % 60;
+      document.getElementById('time-tracked').textContent = `${elapsedHours}h ${remainingMinutes}m`;
+    }
+  }
 
-  // function saveInputTime() {
-  //   const timeInput = document.getElementById('time-input').value;
-  //   document.getElementById('display-time').textContent = timeInput;
-  //   localStorage.setItem('savedTime', timeInput);
-  // }
+  function saveInputTime() {
+    const timeInput = document.getElementById('time-input').value;
+    document.getElementById('display-time').textContent = timeInput;
+    localStorage.setItem('savedTime', timeInput);
+  }
 
-  // document.getElementById('save-time').addEventListener('click', saveInputTime);
+  document.getElementById('save-time').addEventListener('click', saveInputTime);
 
-  // setInterval(updateTime, 1000);
-  // updateTime(); // 初回実行
+  setInterval(updateTime, 1000);
+  updateTime(); // 初回実行
 
-  // // ページ読み込み時に保存された時間を表示
-  // document.addEventListener('DOMContentLoaded', () => {
-  //   const savedTime = localStorage.getItem('savedTime');
-  //   if (savedTime) {
-  //     document.getElementById('display-time').textContent = savedTime;
-  //     document.getElementById('time-input').value = savedTime;
-  //   }
-  // });
+  // ページ読み込み時に保存された時間を表示
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTime = localStorage.getItem('savedTime');
+    if (savedTime) {
+      document.getElementById('display-time').textContent = savedTime;
+      document.getElementById('time-input').value = savedTime;
+    }
+  });
 
-  // const onClickAdd = () => {
-  //   const inputText = document.getElementById('add-text').value;
-  //   document.getElementById('add-text').value = '';
-  //   createIncompleteTodo(inputText);
-  // }
+  const onClickAdd = () => {
+    const inputText = document.getElementById('add-text').value;
+    document.getElementById('add-text').value = '';
+    createIncompleteTodo(inputText);
+  }
 
-  // const createIncompleteTodo = (todo) => {
-  //   const li = document.createElement('li');
-  //   li.className = 'flex items-center justify-between';
+  const createIncompleteTodo = (todo) => {
+    const li = document.createElement('li');
+    li.className = 'flex items-center justify-between';
 
-  //   const p = document.createElement('p');
-  //   p.className = 'flex-grow my-3';
-  //   p.innerText = todo;
+    const p = document.createElement('p');
+    p.className = 'flex-grow my-3';
+    p.innerText = todo;
 
-  //   const div = document.createElement('div');
-  //   div.className = 'flex-shrink-0';
+    const div = document.createElement('div');
+    div.className = 'flex-shrink-0';
 
-  //   const completeButton = document.createElement('button');
-  //   completeButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
-  //   completeButton.innerText = 'Complete';
-  //   completeButton.addEventListener('click', () => {
-  //     const moveTarget = completeButton.closest('li');
-  //     completeButton.nextElementSibling.remove();
-  //     completeButton.remove();
-  //     const backButton = document.createElement('button');
-  //     backButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
-  //     backButton.innerText = 'back';
-  //     backButton.addEventListener('click', () => {
-  //       const todoText = backButton.closest('li').querySelector('p').innerText;
-  //       createIncompleteTodo(todoText);
-  //       document.querySelector('.complete-lists').removeChild(backButton.closest('li'));
-  //     });
-  //     div.appendChild(backButton);
-  //     document.querySelector('.complete-lists').appendChild(moveTarget);
-  //   });
+    const completeButton = document.createElement('button');
+    completeButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
+    completeButton.innerText = 'Complete';
+    completeButton.addEventListener('click', () => {
+      const moveTarget = completeButton.closest('li');
+      completeButton.nextElementSibling.remove();
+      completeButton.remove();
+      const backButton = document.createElement('button');
+      backButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
+      backButton.innerText = 'back';
+      backButton.addEventListener('click', () => {
+        const todoText = backButton.closest('li').querySelector('p').innerText;
+        createIncompleteTodo(todoText);
+        document.querySelector('.complete-lists').removeChild(backButton.closest('li'));
+      });
+      div.appendChild(backButton);
+      document.querySelector('.complete-lists').appendChild(moveTarget);
+    });
 
-  //   const deleteButton = document.createElement('button');
-  //   deleteButton.className = 'ml-2 px-4 py-1 bg-red-300 text-white rounded-md hover:bg-red-500';
-  //   deleteButton.innerText = 'Delete';
-  //   deleteButton.addEventListener('click', () => {
-  //     const deleteTarget = deleteButton.closest('li');
-  //     document.querySelector('.incomplete-lists').removeChild(deleteTarget);
-  //   });
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'ml-2 px-4 py-1 bg-red-300 text-white rounded-md hover:bg-red-500';
+    deleteButton.innerText = 'Delete';
+    deleteButton.addEventListener('click', () => {
+      const deleteTarget = deleteButton.closest('li');
+      document.querySelector('.incomplete-lists').removeChild(deleteTarget);
+    });
 
-  //   li.appendChild(p);
-  //   li.appendChild(div);
-  //   div.appendChild(completeButton);
-  //   div.appendChild(deleteButton);
-  //   document.querySelector('.incomplete-lists').appendChild(li);
-  // };
+    li.appendChild(p);
+    li.appendChild(div);
+    div.appendChild(completeButton);
+    div.appendChild(deleteButton);
+    document.querySelector('.incomplete-lists').appendChild(li);
+  };
 
-  // document.getElementById('add-button').addEventListener('click', onClickAdd);
+  document.getElementById('add-button').addEventListener('click', onClickAdd);
 </script>

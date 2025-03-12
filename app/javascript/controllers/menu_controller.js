@@ -1,14 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+  static targets = ["userMenuButton", "userMenu"];
+
   connect() {
     console.log("Menu controller connected!");
 
-    this.userMenuButton = this.element.querySelector("#user-menu-button");
-    this.userMenu = this.element.querySelector('[role="menu"]');
-
-    if (this.userMenuButton) {
-      this.userMenuButton.addEventListener("click", this.toggleMenu.bind(this));
+    if (this.hasUserMenuButtonTarget) {
+      this.userMenuButtonTarget.addEventListener("click", this.toggleMenu.bind(this));
     }
 
     document.addEventListener("click", this.closeMenu.bind(this));
@@ -16,20 +15,21 @@ export default class extends Controller {
 
   toggleMenu(event) {
     event.stopPropagation();
-    const isExpanded = this.userMenuButton.getAttribute("aria-expanded") === "true";
-    this.userMenuButton.setAttribute("aria-expanded", !isExpanded);
-    this.userMenu.classList.toggle("hidden");
+    const isExpanded = this.userMenuButtonTarget.getAttribute("aria-expanded") === "true";
+    this.userMenuButtonTarget.setAttribute("aria-expanded", !isExpanded);
+    this.userMenuTarget.classList.toggle("hidden");
   }
 
   closeMenu(event) {
+    event.stopPropagation();
     if (
-      this.userMenuButton &&
-      !this.userMenuButton.contains(event.target) &&
-      this.userMenu &&
-      !this.userMenu.contains(event.target)
+      this.hasUserMenuButtonTarget &&
+      !this.userMenuButtonTarget.contains(event.target) &&
+      this.hasUserMenuTarget &&
+      !this.userMenuTarget.contains(event.target)
     ) {
-      this.userMenuButton.setAttribute("aria-expanded", "false");
-      this.userMenu.classList.add("hidden");
+      this.userMenuButtonTarget.setAttribute("aria-expanded", "false");
+      this.userMenuTarget.classList.add("hidden");
     }
   }
 }

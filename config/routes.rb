@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "materials", to: "materials#index"
   root "home#index"
   get "dashboard", to: "home#dashboard"
   resource :session

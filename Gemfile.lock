@@ -120,6 +120,7 @@ GEM
       activesupport (>= 6.1)
     groupdate (6.5.1)
       activesupport (>= 7)
+    holidays (8.8.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.1.0)
@@ -398,6 +399,7 @@ DEPENDENCIES
   debug
   faker
   groupdate
+  holidays (~> 8.8)
   importmap-rails
   jbuilder
   kamal

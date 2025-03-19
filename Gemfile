@@ -69,3 +69,5 @@ gem "chartkick"
 gem "groupdate"
 gem "faker"
 gem "pagy"
+
+gem "holidays", "~> 8.8"

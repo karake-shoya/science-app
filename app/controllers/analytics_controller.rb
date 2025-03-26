@@ -3,6 +3,9 @@ require "holidays"
 class AnalyticsController < ApplicationController
   def index
     @users = User.all
+    @tasks = Clickup.fetch_tasks
+    @total_duration_hours = Clickup.fetch_tracked_time
+
     @pagy, @users = pagy(@users)
 
     @today = Date.current
@@ -11,7 +14,7 @@ class AnalyticsController < ApplicationController
     target_date = calculate_until == "yesterday" ? @today.yesterday : @today
     @today_formatted = target_date.strftime("%-m月%d日 (%a)")
 
-    @hours_u1 = params[:total_hours_user1].to_f || 0.0
+    @hours_u1 = params[:total_hours_user1].present? ? params[:total_hours_user1].to_f : Clickup.fetch_tracked_time
     @hours_u2 = params[:total_hours_user2].to_f || 0.0
 
     start_date = target_date.beginning_of_month

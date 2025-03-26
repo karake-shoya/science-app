@@ -4,15 +4,15 @@
     <p class="p-2 text-gray-600 mb-6">ログイン中のメールアドレス：<%= Current.user.email_address if Current.user %></p>
 
     <div class="mt-10 max-w-lg mx-auto">
-      <h2 class="text-xl font-bold text-center mb-4">Salesforce稼働時間計算</h2>
+      <h2 class="text-xl font-bold text-center mb-4">稼働時間計算</h2>
       <div class="bg-white p-6 rounded-lg shadow-lg">
         <form method="get" action="<%= analytics_path %>">
           <div class="mb-4">
-            <label for="total_hours_user1" class="block text-gray-700 font-bold mb-2">Uenoの累計稼働時間（h）</label>
-            <input type="number" step="0.01" name="total_hours_user1" id="total_hours_user1" value="<%= @hours_u1 %>" class="w-full p-2 border rounded">
+            <label for="total_hours_user1" class="block text-gray-700 font-bold mb-2">User1の累計稼働時間（h）</label>
+            <input type="number" step="0.01" name="total_hours_user1" id="total_hours_user1" value="<%= params[:total_hours_user1] || @hours_u1 %>" class="w-full p-2 border rounded">
           </div>
           <div class="mb-4">
-            <label for="total_hours_user2" class="block text-gray-700 font-bold mb-2">Nagatoの累計稼働時間（h）</label>
+            <label for="total_hours_user2" class="block text-gray-700 font-bold mb-2">User2の累計稼働時間（h）</label>
             <input type="number" step="0.01" name="total_hours_user2" id="total_hours_user2" value="<%= @hours_u2 %>" class="w-full p-2 border rounded">
           </div>
           <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">計算</button>
@@ -39,8 +39,8 @@
           <thead>
             <tr class="bg-gray-300">
               <th class="px-4 py-2">項目</th>
-              <th class="px-4 py-2">Ueno</th>
-              <th class="px-4 py-2">Nagato</th>
+              <th class="px-4 py-2">User1</th>
+              <th class="px-4 py-2">User2</th>
               <th class="px-4 py-2">合計</th>
             </tr>
           </thead>
@@ -82,6 +82,53 @@
         </table>
         <p class="text-lg mt-4">累計稼働時間： <span class="font-bold"><%= (@final_u1 + @final_u2).round(1) %> h</span><span class="text-sm"> (予測)</p>
       </div>
+    </div>
+
+    <div class="mt-10 p-8">
+      <h2 class="text-xl font-bold text-center mb-4">タスク一覧</h2>
+      <table class="table-auto w-full bg-white rounded-lg shadow-lg">
+        <thead>
+          <tr class="bg-gray-300">
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Assignees</th>
+            <th class="px-4 py-2">Status</th>
+            <th class="px-4 py-2">Created_at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @tasks.present? %>
+          <% @tasks.each do |task| %>
+          <tr class="border-t">
+            <td class="px-4 py-2"><%= task["name"] %></td>
+            <td class="px-4 py-2">
+              <% if task["assignees"].present? %>
+              <% task["assignees"].each do |assignee| %>
+              <div class="flex items-center space-x-2 mb-1">
+                <img src="<%= assignee["profilePicture"] %>" alt="<%= assignee["username"] %>" class="w-8 h-8 rounded-full">
+                <span><%= assignee["username"] %></span>
+              </div>
+              <% end %>
+              <% else %>
+              未設定
+              <% end %>
+            </td>
+            <td class="px-4 py-2"><%= task["status"]["status"] %></td>
+            <td class="px-4 py-2">
+              <% if task["date_created"].present? %>
+              <%= Time.at(task["date_created"].to_i / 1000).strftime('%Y-%m-%d') %>
+              <% else %>
+              --
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <% else %>
+          <tr>
+            <td colspan="3" class="px-4 py-2 text-center">タスクが見つかりません。</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
 
     <div class="mt-10 flex justify-center">

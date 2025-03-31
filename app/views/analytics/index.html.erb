@@ -9,7 +9,7 @@
         <form method="get" action="<%= analytics_path %>">
           <div class="mb-4">
             <label for="total_hours_user1" class="block text-gray-700 font-bold mb-2">User1の累計稼働時間（h）</label>
-            <input type="number" step="0.01" name="total_hours_user1" id="total_hours_user1" value="<%= params[:total_hours_user1] || @hours_u1 %>" class="w-full p-2 border rounded">
+            <input type="number" step="0.01" name="total_hours_user1" id="total_hours_user1" value="<%= @hours_u1 %>" class="w-full p-2 border rounded">
           </div>
           <div class="mb-4">
             <label for="total_hours_user2" class="block text-gray-700 font-bold mb-2">User2の累計稼働時間（h）</label>

@@ -71,3 +71,5 @@ gem "faker"
 gem "pagy"
 
 gem "holidays", "~> 8.8"
+
+gem "rest-client"

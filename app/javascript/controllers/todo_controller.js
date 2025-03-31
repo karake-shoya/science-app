@@ -105,8 +105,3 @@ export default class extends Controller {
     });
   }
 }
-
-document.getElementById('add-button').addEventListener('click', (event) => {
-  const controller = event.currentTarget.closest('[data-controller="todo"]').controller;
-  controller.addTodo();
-});

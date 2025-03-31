@@ -8,17 +8,19 @@ class AnalyticsController < ApplicationController
 
     @pagy, @users = pagy(@users)
 
-    @today = Date.current
+    @today = Time.zone.today
 
     calculate_until = params[:calculate_until] || "today"
     target_date = calculate_until == "yesterday" ? @today.yesterday : @today
     @today_formatted = target_date.strftime("%-m月%d日 (%a)")
 
-    @hours_u1 = params[:total_hours_user1].present? ? params[:total_hours_user1].to_f : Clickup.fetch_tracked_time
+    @hours_u1 = @total_duration_hours
     @hours_u2 = params[:total_hours_user2].to_f || 0.0
 
     start_date = target_date.beginning_of_month
     end_date = target_date.end_of_month
+
+    Rails.logger.info("Date range: #{start_date} to #{end_date}")
 
     @business_days = (start_date..target_date).count { |date| business_day?(date) }
     @remaining_days = (target_date.next_day..end_date).count { |date| business_day?(date) }

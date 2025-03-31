@@ -46,8 +46,10 @@ class Clickup < ApplicationRecord
   def self.fetch_tracked_time
     team_id = ENV["CLICKUP_TEAM_ID"]
     assignee_id = ENV["CLICKUP_ASSIGNEE_ID"]
-    start_date = Time.zone.today.beginning_of_month.beginning_of_day.to_i * 1000
-  end_date = Time.zone.today.end_of_month.end_of_day.to_i * 1000
+    today = Time.zone.today
+    Rails.logger.info("Fetching tracked time from ClickUp for today: #{today}")
+    start_date = today.beginning_of_month.beginning_of_day.to_i * 1000
+    end_date = today.end_of_month.end_of_day.to_i * 1000
     Rails.logger.info("Fetching tracked time from ClickUp for the period: #{start_date} to #{end_date}")
 
     url = URI("#{base_url}/team/#{team_id}/time_entries?assignee=#{assignee_id}&list_id=#{list_id}&start_date=#{start_date}&end_date=#{end_date}")

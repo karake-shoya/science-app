@@ -24,7 +24,7 @@ class AnalyticsController < ApplicationController
 
   @business_days = (start_date..target_date).count { |date| business_day?(date) }
   subtract_days = params[:subtract_days].to_i
-  @business_days_adjusted = [@business_days - subtract_days, 0].max
+  @business_days_adjusted = [ @business_days - subtract_days, 0 ].max
   @remaining_days = (target_date.next_day..end_date).count { |date| business_day?(date) }
 
   @per_day_u1 = @business_days_adjusted > 0 ? (@hours_u1 / @business_days_adjusted) : 0

@@ -46,7 +46,6 @@ class Clickup < ApplicationRecord
   def self.fetch_tracked_time
     team_id = ENV["CLICKUP_TEAM_ID"]
     assignee_id = ENV["CLICKUP_ASSIGNEE_ID"]
-    include_task_id = ENV["CLICKUP_INCLUDE_TASK_ID"]
     today = Time.zone.today
     Rails.logger.info("Fetching tracked time from ClickUp for today: #{today}")
     start_date = today.beginning_of_month.beginning_of_day.to_i * 1000
@@ -59,8 +58,7 @@ class Clickup < ApplicationRecord
     if response
       time_entries = response["data"]
       filtered_entries = time_entries.reject do |entry|
-        entry.dig("task", "status", "status") == "未着手" &&
-        entry.dig("task", "id") != include_task_id
+        entry.dig("task", "status", "status") == "未着手"
       end
 
       total_duration_ms = filtered_entries.sum { |entry| entry["duration"].to_i }

@@ -12,6 +12,29 @@
               <p class="m-2"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d (%A)') %></p>
               <p class="m-2"><span id="current-time" class="font-mono" data-dashboard-target="currentTime"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%H:%M:%S') %></span></p>
             </div>
+            <!-- 指定日からの経過日数・月日表示（指定日入力対応） -->
+            <div class="flex flex-col items-center mb-4 text-base text-gray-700">
+              <form id="start-date-form" class="flex items-center mb-2" method="get">
+                <label for="start-date" class="mr-2">基準日：</label>
+                <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || '2024-04-01' %>" class="border rounded px-2 py-1" data-dashboard-target="startDateInput" onchange="this.form.submit()">
+              </form>
+              <% start_date = Date.parse(params[:start_date].presence || '2024-04-01') rescue Date.parse('2024-04-01') %>
+              <% today = Time.current.in_time_zone('Asia/Tokyo').to_date %>
+              <% days_passed = (today - start_date).to_i + 1 %>
+              <% months_passed = (today.year - start_date.year) * 12 + (today.month - start_date.month) %>
+              <% day_of_month = today.day - start_date.day + 1 %>
+              <% if day_of_month <= 0 %>
+              <% months_passed -= 1 %>
+              <% prev_month = today.prev_month %>
+              <% day_of_month = (prev_month.end_of_month.day - start_date.day + 1) + today.day %>
+              <% end %>
+              <div>
+                <span class="font-semibold"><%= start_date.strftime('%Y/%m/%d') %>から</span>
+              </div>
+              <div>
+                <span class="ml-2"> <%= days_passed %>日 (<%= months_passed %>ヶ月と<%= day_of_month %>日)</span>
+              </div>
+            </div>
 
             <div class="my-5 text-gray-700 font-medium">
               <div class="flex items-center mb-4">
@@ -22,6 +45,18 @@
               <div class="block mb-4">
                 <label for="time-display">Starting time：</label>
                 <span id="starting-time" data-dashboard-target="startingTime" class="font-mono">--:--</span></p>
+              </div>
+              <div class="flex items-center mb-4">
+                <p>Finished time：<span id="end-time" data-dashboard-target="endTime" class="font-mono">--:--</span></p>
+                <button type="button" class="ml-2 px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xs" data-action="click->dashboard#add30minToEndTime">
+                  +30m
+                </button>
+                <button type="button" class="ml-1 px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xs" data-action="click->dashboard#add1hToEndTime">
+                  +1h
+                </button>
+                <button type="button" class="ml-1 px-2 py-1 bg-red-200 rounded hover:bg-red-300 text-xs" data-action="click->dashboard#resetEndTimeOffset">
+                  Reset
+                </button>
               </div>
               <div class="flex items-center">
                 <p class=" mr-5">Time tracked：<span id="time-tracked" data-dashboard-target="timeTracked" class="font-mono">--:--</span></p>

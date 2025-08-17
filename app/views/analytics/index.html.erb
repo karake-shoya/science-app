@@ -15,6 +15,10 @@
             <label for="total_hours_user2" class="block text-gray-700 font-bold mb-2">User2の累計稼働時間（h）</label>
             <input type="number" step="0.01" name="total_hours_user2" id="total_hours_user2" value="<%= @hours_u2 %>" class="w-full p-2 border rounded">
           </div>
+          <div class="mb-4">
+            <label for="subtract_days" class="block text-gray-700 font-bold mb-2">営業日数から減らす日数（有給等）</label>
+            <input type="number" name="subtract_days" id="subtract_days" value="<%= params[:subtract_days].presence || 0 %>" min="0" class="w-full p-2 border rounded">
+          </div>
           <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">計算</button>
           <button type="submit" name="calculate_until" value="yesterday" class="bg-gray-500 text-white px-4 py-2 rounded">昨日の日付で計算</button>
         </form>
@@ -26,11 +30,21 @@
             </tr>
             <tr class="border-t">
               <td class="px-4 py-2">営業日数</td>
-              <td class="px-4 py-2"><%= @business_days %> 日</td>
+              <td class="px-4 py-2">
+                <%= @business_days %> 日
+                <% if params[:subtract_days].to_i > 0 %>
+                <span class="ml-2 text-sm text-gray-500">（-<%= params[:subtract_days] %>日 → <%= @business_days_adjusted %>日）</span>
+                <% end %>
+              </td>
             </tr>
             <tr class="border-t">
               <td class="px-4 py-2">残り営業日数</td>
-              <td class="px-4 py-2"><%= @remaining_days %> 日</td>
+              <td class="px-4 py-2">
+                <%= @remaining_days %> 日
+                <% if params[:subtract_days].to_i > 0 %>
+                <span class="ml-2 text-sm text-gray-500"></span>
+                <% end %>
+              </td>
             </tr>
           </tbody>
         </table>

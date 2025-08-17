@@ -2,10 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dashboard"
 export default class extends Controller {
-  static targets = [ "currentTime", "timeInput", "startingTime","localTime", "timeTracked", "breakCheckbox" ]
+  static targets = [ "currentTime", "timeInput", "startingTime", "localTime", "timeTracked", "breakCheckbox", "endTime" ]
 
   connect() {
     console.log("dashboard_controller connected")
+    this.endTimeOffsetMinitues = 0;
     this.updateTime()
     this.interval = setInterval(() => {
       this.updateTime()
@@ -40,6 +41,7 @@ export default class extends Controller {
     const startingTime = this.startingTimeTarget.textContent;
     if (startingTime != "--:--") {
       this.timeTrackedCalculation();
+      this.updateEndTime();
     }
   }
 
@@ -78,5 +80,47 @@ export default class extends Controller {
   toggleBreakCheckbox() {
     const isChecked = this.breakCheckboxTarget.checked;
     localStorage.setItem('breakCheckboxState', isChecked);
+  }
+
+  add30minToEndTime() {
+    this.endTimeOffsetMinutes = (this.endTimeOffsetMinutes || 0) + 30;
+    this.updateEndTime();
+  }
+
+  add1hToEndTime() {
+    this.endTimeOffsetMinutes = (this.endTimeOffsetMinutes || 0) + 60;
+    this.updateEndTime();
+  }
+
+  resetEndTimeOffset() {
+    this.endTimeOffsetMinutes = 0;
+    this.updateEndTime();
+  }
+
+  _addMinutesToEndTime(minutes) {
+    const endTimeEl = this.endTimeTarget;
+    let timeStr = endTimeEl.textContent.trim();
+    if (!/^\d{2}:\d{2}$/.test(timeStr)) return;
+    let [h, m] = timeStr.split(':').map(Number);
+    let date = new Date();
+    date.setHours(h, m + minutes, 0, 0);
+    let newH = String(date.getHours()).padStart(2, '0');
+    let newM = String(date.getMinutes()).padStart(2, '0');
+    endTimeEl.textContent = `${newH}:${newM}`;
+  }
+
+  updateEndTime() {
+    const startingTime = this.startingTimeTarget.textContent;
+    if (startingTime) {
+      const [startingHours, startingMinutes] = startingTime.split(':').map(Number);
+      const startingDate = new Date();
+      startingDate.setHours(startingHours, startingMinutes, 0, 0);
+
+      const offset = this.endTimeOffsetMinutes || 0;
+      const endDate = new Date(startingDate.getTime() + (9 * 60 + offset) * 60 * 1000);
+      const endHours = String(endDate.getHours()).padStart(2, '0');
+      const endMinutes = String(endDate.getMinutes()).padStart(2, '0');
+      this.endTimeTarget.textContent = `${endHours}:${endMinutes}`;
+    }
   }
 }

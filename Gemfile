@@ -75,5 +75,5 @@ gem "holidays", "~> 8.8"
 gem "rest-client"
 
 group :development do
-  gem 'ruby-lsp', require: false
+  gem "ruby-lsp", require: false
 end

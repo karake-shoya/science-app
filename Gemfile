@@ -56,7 +56,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem "pg"
 end
 
 group :test do
@@ -75,5 +74,5 @@ gem "holidays", "~> 8.8"
 gem "rest-client"
 
 group :development do
-  gem 'ruby-lsp', require: false
+  gem "ruby-lsp", require: false
 end

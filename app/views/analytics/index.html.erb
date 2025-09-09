@@ -19,7 +19,7 @@
             <label for="subtract_days" class="block text-gray-700 font-bold mb-2">営業日数から減らす日数（有給等）</label>
             <input type="number" name="subtract_days" id="subtract_days" value="<%= params[:subtract_days].presence || 0 %>" min="0" class="w-full p-2 border rounded">
           </div>
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">計算</button>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">計算する</button>
           <button type="submit" name="calculate_until" value="yesterday" class="bg-gray-500 text-white px-4 py-2 rounded">昨日の日付で計算</button>
         </form>
         <table class="table-auto w-full bg-white rounded-lg shadow-lg mt-4">

@@ -102,7 +102,7 @@
               <ul>
                 <% @qiita_trends.each do |item| %>
                 <li class="mb-3">
-                  <a href="<%= item.link %>" target="_blank" class="text-green-600 hover:underline">
+                  <a href="<%= item.respond_to?(:link) && item.link.respond_to?(:href) ? item.link.href : (item.respond_to?(:link) ? item.link.to_s : '') %>" target="_blank" class="text-green-600 hover:underline">
                     <%= item.title.respond_to?(:content) ? item.title.content : item.title.to_s %>
                   </a>
                 </li>

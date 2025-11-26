@@ -1,5 +1,5 @@
-require 'open-uri'
-require 'rss'
+require "open-uri"
+require "rss"
 
 class HomeController < ApplicationController
   allow_unauthenticated_access only: [ :index ]
@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    url = 'https://qiita.com/popular-items/feed'
+    url = "https://qiita.com/popular-items/feed"
     rss = URI.open(url).read
     feed = RSS::Parser.parse(rss, false)
     @qiita_trends = feed.items.first(15)

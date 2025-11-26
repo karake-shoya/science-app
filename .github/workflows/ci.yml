@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   scan_ruby:
@@ -91,11 +91,20 @@ jobs:
             sleep 2
           done
 
+      - name: Migrate database
+        run: bin/rails db:migrate
+
+      - name: Seed database
+        run: bin/rails db:seed
+
+      - name: Prepare test database
+        run: bin/rails db:test:prepare
+
       - name: Run tests
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
-        run: bin/rails db:test:prepare test test:system
+        run: bin/rails test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v5
@@ -103,4 +112,12 @@ jobs:
         with:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+      - name: Upload test logs
+        uses: actions/upload-artifact@v5
+        if: failure()
+        with:
+          name: test-logs
+          path: log/test.log
           if-no-files-found: ignore

@@ -76,3 +76,5 @@ gem "rest-client"
 group :development do
   gem "ruby-lsp", require: false
 end
+
+gem "rss"

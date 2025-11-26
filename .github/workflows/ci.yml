@@ -2,8 +2,7 @@ name: CI
 
 on:
   push:
-    branches:
-      [ main, develop ]
+    branches: main
   pull_request:
     types: [opened, synchronize, reopened] # PR作成・更新時のみ発火
 

@@ -1,9 +1,15 @@
 name: CI
 
 on:
-  pull_request:
   push:
-    branches: [ main, develop ]
+    branches:
+      [ main, develop ]
+  pull_request:
+    types: [opened, synchronize, reopened] # PR作成・更新時のみ発火
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   scan_ruby:
@@ -97,12 +103,6 @@ jobs:
           DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
         run: bin/rails db:migrate
 
-      - name: Seed database
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
-        run: bin/rails db:seed
-
       - name: Prepare test database
         env:
           RAILS_ENV: test
@@ -113,7 +113,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
-        run: bin/rails test test:system
+        run: bin/rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v5

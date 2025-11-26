@@ -104,6 +104,7 @@ GEM
     connection_pool (2.5.5)
     crass (1.0.6)
     date (3.5.0)
+    diff-lcs (1.6.2)
     domain_name (0.6.20240107)
     dotenv (3.1.8)
     drb (2.2.3)
@@ -288,6 +289,27 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.4.1)
+    rspec (3.13.2)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.6)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.7)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (8.0.2)
+      actionpack (>= 7.2)
+      activesupport (>= 7.2)
+      railties (>= 7.2)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.6)
     rss (0.3.1)
       rexml
     rubocop (1.79.2)
@@ -429,6 +451,8 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.1.1)
   rest-client
+  rspec (~> 3.13)
+  rspec-rails
   rss
   rubocop-rails-omakase
   ruby-lsp

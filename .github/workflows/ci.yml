@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened] # PR作成・更新時のみ発火
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:

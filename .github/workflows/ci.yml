@@ -92,12 +92,21 @@ jobs:
           done
 
       - name: Migrate database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
         run: bin/rails db:migrate
 
       - name: Seed database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
         run: bin/rails db:seed
 
       - name: Prepare test database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/test_db
         run: bin/rails db:test:prepare
 
       - name: Run tests

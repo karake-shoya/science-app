@@ -32,7 +32,7 @@ Science Appは、開発者や研究者の作業効率化を目的としたRails�
 
 ## 技術スタック
 
-- **Backend**: Ruby on Rails 8.0.1
+- **Backend**: Ruby on Rails 8.1.1
 - **Database**: PostgreSQL
 - **Frontend**: Tailwind CSS, Stimulus JS, Hotwire/Turbo
 - **Charts**: Chartkick, Groupdate

@@ -6,7 +6,7 @@ export default class extends Controller {
 
   connect() {
     console.log("dashboard_controller connected")
-    this.endTimeOffsetMinitues = 0;
+    this.endTimeOffsetMinutes = 0;
     this.updateTime()
     this.interval = setInterval(() => {
       this.updateTime()

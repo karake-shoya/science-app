@@ -19,6 +19,10 @@ class Clickup < ApplicationRecord
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
 
+    if Rails.env.development?
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+
     request = Net::HTTP::Get.new(url)
     request["accept"] = "application/json"
     request["Authorization"] = api_key

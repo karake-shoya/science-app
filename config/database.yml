@@ -14,4 +14,4 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %> # 本番環境もHerokuのURLを使用
+  database: science_app_production

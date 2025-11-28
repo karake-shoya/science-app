@@ -29,11 +29,52 @@
 
                 <!-- 時間入力・表示 -->
                 <div class="space-y-3">
-                  <!-- 開始時刻入力 -->
+                  <!-- 開始時刻入力（カスタムタイムピッカー） -->
                   <div class="flex items-center justify-between">
                     <span class="text-sm font-medium text-slate-600 dark:text-slate-300">開始時刻</span>
                     <div class="flex items-center gap-2">
-                      <input type="time" id="time-input" data-dashboard-target="timeInput" class="w-28 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-100 text-sm py-1.5 px-2 font-mono focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent">
+                      <div data-controller="time-picker" data-time-picker-hour-value="9" data-time-picker-minute-value="0" class="relative">
+                        <!-- 表示ボタン -->
+                        <button type="button" data-action="click->time-picker#toggle" class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg hover:border-indigo-400 dark:hover:border-cyan-500 transition-colors">
+                          <span data-time-picker-target="display" class="font-mono text-sm font-semibold text-slate-700 dark:text-slate-100">09:00</span>
+                          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <input type="hidden" data-time-picker-target="hiddenInput" data-dashboard-target="timeInput" value="09:00">
+
+                        <!-- ドロップダウン -->
+                        <div data-time-picker-target="dropdown" class="hidden absolute right-0 mt-2 z-50 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-150 opacity-0 scale-95">
+                          <div class="flex">
+                            <!-- 時間リスト -->
+                            <div class="border-r border-slate-200 dark:border-slate-700">
+                              <div class="px-3 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 text-center">時</div>
+                              <div data-time-picker-target="hourList" class="h-48 overflow-y-auto w-16">
+                                <% (0..23).each do |hour| %>
+                                <button type="button" data-action="click->time-picker#selectHour" data-hour="<%= hour %>" class="w-full py-2 text-center text-sm font-mono hover:bg-indigo-100 dark:hover:bg-slate-600 transition-colors text-slate-700 dark:text-slate-200">
+                                  <%= hour.to_s.rjust(2, '0') %>
+                                </button>
+                                <% end %>
+                              </div>
+                            </div>
+                            <!-- 分リスト -->
+                            <div>
+                              <div class="px-3 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 text-center">分</div>
+                              <div data-time-picker-target="minuteList" class="h-48 overflow-y-auto w-16">
+                                <% (0..55).step(5).each do |minute| %>
+                                <button type="button" data-action="click->time-picker#selectMinute" data-minute="<%= minute %>" class="w-full py-2 text-center text-sm font-mono hover:bg-indigo-100 dark:hover:bg-slate-600 transition-colors text-slate-700 dark:text-slate-200">
+                                  <%= minute.to_s.rjust(2, '0') %>
+                                </button>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 現在時刻ボタン -->
+                          <div class="border-t border-slate-200 dark:border-slate-700 p-2">
+                            <button type="button" data-action="click->time-picker#setNow" class="w-full py-1.5 text-xs font-semibold text-indigo-600 dark:text-cyan-400 hover:bg-indigo-50 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                              🕐 現在時刻
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                       <button id="save-time" data-action="click->dashboard#saveInputTime" class="px-3 py-1.5 bg-indigo-500 dark:bg-cyan-600 text-white rounded-lg hover:bg-indigo-600 dark:hover:bg-cyan-700 transition-colors font-semibold text-xs">Save</button>
                     </div>
                   </div>

@@ -1,11 +1,8 @@
-<div class="bg-gray-600">
-  <div class="mx-auto max-w-7xl min-h-screen bg-gray-200">
-    <h1 class="p-2 text-2xl font-bold font-serif">Analytics</h1>
-    <p class="p-2 text-gray-600 mb-6">ログイン中のメールアドレス：<%= Current.user.email_address if Current.user %></p>
-
-    <%= render "working_hours_form", calculator: @calculator %>
-    <%= render "tasks_table", tasks: @tasks %>
-    <%= render "user_chart" %>
-    <%= render "users_table", users: @users, pagy: @pagy %>
+<div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
+  <div class="mx-auto max-w-7xl px-6 py-6">
+    <div class="flex flex-row gap-6 items-start">
+      <%= render "working_hours_form", calculator: @calculator %>
+      <%= render "tasks_table", tasks: @tasks %>
+    </div>
   </div>
 </div>

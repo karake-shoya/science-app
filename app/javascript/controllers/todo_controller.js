@@ -54,11 +54,11 @@ export default class extends Controller {
   createIncompleteTodo(content, id) {
     const { li, div } = this.createTodoElement(content, id)
 
-    const completeButton = this.createButton('Complete', 'bg-blue-300 hover:bg-blue-500', () => {
+    const completeButton = this.createButton('✓', 'bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700', () => {
       this.moveToComplete(li, div, id)
     })
 
-    const deleteButton = this.createButton('Delete', 'bg-red-300 hover:bg-red-500', () => {
+    const deleteButton = this.createButton('✕', 'bg-rose-500 hover:bg-rose-600 dark:bg-rose-600 dark:hover:bg-rose-700', () => {
       this.deleteTodo(li, id)
     })
 
@@ -68,24 +68,26 @@ export default class extends Controller {
   }
 
   createCompleteTodo(content, id) {
-    const { li, div } = this.createTodoElement(content, id)
+    const { li, div } = this.createTodoElement(content, id, true)
 
     const backButton = this.createBackButton(li, id)
     div.appendChild(backButton)
     this.completeListsTarget.appendChild(li)
   }
 
-  createTodoElement(content, id) {
+  createTodoElement(content, id, completed = false) {
     const li = document.createElement('li')
-    li.className = 'flex items-center justify-between'
+    li.className = 'flex items-center justify-between p-3 rounded-lg bg-white/50 dark:bg-slate-600/50 hover:bg-white dark:hover:bg-slate-600 transition-colors'
     li.dataset.todoId = id
 
     const p = document.createElement('p')
-    p.className = 'flex-grow my-3'
+    p.className = completed
+      ? 'flex-grow text-slate-500 dark:text-slate-400 line-through'
+      : 'flex-grow text-slate-700 dark:text-slate-200'
     p.innerText = content
 
     const div = document.createElement('div')
-    div.className = 'flex-shrink-0'
+    div.className = 'flex-shrink-0 flex gap-1'
 
     li.appendChild(p)
     li.appendChild(div)
@@ -95,14 +97,14 @@ export default class extends Controller {
 
   createButton(text, colorClass, onClick) {
     const button = document.createElement('button')
-    button.className = `ml-2 px-4 py-1 ${colorClass} text-white rounded-md`
+    button.className = `ml-1 px-3 py-1.5 ${colorClass} text-white rounded-lg text-sm font-medium transition-colors shadow-sm hover:shadow-md`
     button.innerText = text
     button.addEventListener('click', onClick)
     return button
   }
 
   createBackButton(li, id) {
-    return this.createButton('back', 'bg-blue-300 hover:bg-blue-500', () => {
+    return this.createButton('↩', 'bg-indigo-500 hover:bg-indigo-600 dark:bg-cyan-600 dark:hover:bg-cyan-700', () => {
       this.moveToIncomplete(li, id)
     })
   }
@@ -114,6 +116,9 @@ export default class extends Controller {
         div.innerHTML = ''
         const backButton = this.createBackButton(li, id)
         div.appendChild(backButton)
+        // Update text style for completed
+        const p = li.querySelector('p')
+        p.className = 'flex-grow text-slate-500 dark:text-slate-400 line-through'
         this.completeListsTarget.appendChild(li)
       } else {
         this.showError('TODOの完了に失敗しました')

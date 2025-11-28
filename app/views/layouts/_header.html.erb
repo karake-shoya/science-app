@@ -1,10 +1,10 @@
 <div data-controller="menu theme">
-  <nav class="bg-gray-800 dark:bg-gray-900">
-    <div class="mx-auto px-2 sm:px-6 lg:px-8">
+  <nav class="bg-slate-800 dark:bg-slate-900 border-b border-slate-700/50 dark:border-slate-800">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
-          <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false" data-menu-target="userMenuButton">
+          <button type="button" class="relative inline-flex items-center justify-center rounded-lg p-2 text-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset transition-colors" aria-controls="mobile-menu" aria-expanded="false" data-menu-target="userMenuButton">
             <span class="absolute -inset-0.5"></span>
             <span class="sr-only">Open main menu</span>
             <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -17,29 +17,28 @@
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
-            <img class="h-8 w-auto" src="<%= asset_path('header/azarashi.png') %>" alt="Your Company">
+            <img class="h-9 w-auto" src="<%= asset_path('header/azarashi.png') %>" alt="Science App">
           </div>
-          <div class="hidden sm:ml-6 sm:block">
-            <div class="flex space-x-4">
-              <%= link_to "Dashboard", dashboard_path, class: "rounded-md px-3 py-2 text-sm font-medium #{current_page?(dashboard_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}" %>
-              <%= link_to "Materials", materials_path, class: "rounded-md px-3 py-2 text-sm font-medium #{current_page?(materials_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}" %>
-              <%= link_to "Analytics", analytics_path, class: "rounded-md px-3 py-2 text-sm font-medium #{current_page?(analytics_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}" %>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">none</a>
+          <div class="hidden sm:ml-8 sm:block">
+            <div class="flex space-x-1">
+              <%= link_to "Dashboard", dashboard_path, class: "rounded-lg px-4 py-2.5 text-[14px] font-semibold tracking-wide transition-all duration-200 #{current_page?(dashboard_path) ? 'bg-indigo-600 dark:bg-cyan-600 text-white shadow-lg shadow-indigo-500/30 dark:shadow-cyan-500/30' : 'text-slate-300 hover:bg-slate-700/80 hover:text-white'}" %>
+              <%= link_to "Materials", materials_path, class: "rounded-lg px-4 py-2.5 text-[14px] font-semibold tracking-wide transition-all duration-200 #{current_page?(materials_path) ? 'bg-indigo-600 dark:bg-cyan-600 text-white shadow-lg shadow-indigo-500/30 dark:shadow-cyan-500/30' : 'text-slate-300 hover:bg-slate-700/80 hover:text-white'}" %>
+              <%= link_to "Analytics", analytics_path, class: "rounded-lg px-4 py-2.5 text-[14px] font-semibold tracking-wide transition-all duration-200 #{current_page?(analytics_path) ? 'bg-indigo-600 dark:bg-cyan-600 text-white shadow-lg shadow-indigo-500/30 dark:shadow-cyan-500/30' : 'text-slate-300 hover:bg-slate-700/80 hover:text-white'}" %>
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <!-- Theme toggle button -->
-          <button type="button" data-action="click->theme#toggle" class="relative rounded-full bg-gray-800 dark:bg-gray-700 p-2 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden mr-2">
+          <button type="button" data-action="click->theme#toggle" class="relative rounded-xl bg-slate-700/80 dark:bg-slate-600/80 p-2.5 text-slate-300 hover:text-white hover:bg-slate-600 dark:hover:bg-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:outline-hidden mr-3 transition-all duration-200">
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">Toggle theme</span>
-            <span data-theme-target="icon" class="text-lg">☀️</span>
+            <span data-theme-target="icon" class="text-lg block w-5 h-5 flex items-center justify-center">☀️</span>
           </button>
 
-          <button type="button" class="relative rounded-full bg-gray-800 dark:bg-gray-700 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+          <button type="button" class="relative rounded-xl bg-slate-700/80 dark:bg-slate-600/80 p-2.5 text-slate-300 hover:text-white hover:bg-slate-600 dark:hover:bg-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:outline-hidden transition-all duration-200">
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">View notifications</span>
-            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
             </svg>
           </button>
@@ -47,17 +46,18 @@
           <!-- Profile dropdown -->
           <div class="relative ml-3">
             <div>
-              <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" id="user-menu-button" aria-expanded="false" aria-haspopup="true" data-action="click->menu#toggleMenu">
+              <button type="button" class="relative flex rounded-full bg-slate-700 ring-2 ring-slate-600/80 dark:ring-slate-500/80 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:outline-hidden hover:ring-indigo-400 dark:hover:ring-cyan-400 transition-all duration-200" id="user-menu-button" aria-expanded="false" aria-haspopup="true" data-action="click->menu#toggleMenu">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">Open user menu</span>
-                <img class="size-8 rounded-full" src="<%= asset_path('header/flog.png') %>" alt="Your profile">
+                <img class="size-9 rounded-full" src="<%= asset_path('header/flog.png') %>" alt="Your profile">
               </button>
             </div>
 
-            <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-800 py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" data-menu-target="userMenu">
-              <%= link_to "マイページ", user_path(Current.user), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" if Current.user %>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-              <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" %>
+            <div class="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-xl bg-white dark:bg-slate-800 py-2 ring-1 shadow-xl ring-slate-200/50 dark:ring-slate-700/50 focus:outline-hidden hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" data-menu-target="userMenu">
+              <%= link_to "マイページ", user_path(Current.user), class: "block px-4 py-3 text-[14px] font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-colors" if Current.user %>
+              <a href="#" class="block px-4 py-3 text-[14px] font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-colors" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+              <div class="my-1 border-t border-slate-200 dark:border-slate-700"></div>
+              <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "block px-4 py-3 text-[14px] font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 transition-colors" %>
             </div>
           </div>
         </div>
@@ -66,11 +66,10 @@
 
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="sm:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3">
-        <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+      <div class="space-y-1 px-3 pt-2 pb-3">
+        <%= link_to "Dashboard", dashboard_path, class: "block rounded-lg px-4 py-3 text-[15px] font-semibold #{current_page?(dashboard_path) ? 'bg-indigo-600 dark:bg-cyan-600 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white'} transition-colors" %>
+        <%= link_to "Materials", materials_path, class: "block rounded-lg px-4 py-3 text-[15px] font-semibold #{current_page?(materials_path) ? 'bg-indigo-600 dark:bg-cyan-600 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white'} transition-colors" %>
+        <%= link_to "Analytics", analytics_path, class: "block rounded-lg px-4 py-3 text-[15px] font-semibold #{current_page?(analytics_path) ? 'bg-indigo-600 dark:bg-cyan-600 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white'} transition-colors" %>
       </div>
     </div>
   </nav>

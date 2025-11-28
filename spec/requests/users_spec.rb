@@ -29,8 +29,8 @@ RSpec.describe "Users", type: :request do
           user: {
             name: "Test User",
             email_address: "newuser@example.com",
-            password: "password123",
-            password_confirmation: "password123"
+            password: "Password123",
+            password_confirmation: "Password123"
           }
         }
       end
@@ -83,12 +83,12 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /users/:id" do
-    let!(:user) { User.create!(email_address: "test@example.com", password: "password123") }
+    let!(:user) { User.create!(email_address: "test@example.com", password: "Password123") }
 
     context "ログイン済みの場合" do
       before do
         post session_path,
-          params: { email_address: "test@example.com", password: "password123" },
+          params: { email_address: "test@example.com", password: "Password123" },
           headers: { "HTTP_AUTHORIZATION" => basic_auth_credentials }
       end
 

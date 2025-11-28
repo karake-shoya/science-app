@@ -7,7 +7,7 @@ RSpec.describe "Materials", type: :request do
       ENV["BASIC_AUTH_PASSWORD"] || "test_password"
     )
   end
-  let!(:user) { User.create!(email_address: "test@example.com", password: "password123") }
+  let!(:user) { User.create!(email_address: "test@example.com", password: "Password123") }
 
   before do
     stub_const("ENV", ENV.to_hash.merge(
@@ -27,7 +27,7 @@ RSpec.describe "Materials", type: :request do
     context "ログイン済みの場合" do
       before do
         post session_path,
-          params: { email_address: "test@example.com", password: "password123" },
+          params: { email_address: "test@example.com", password: "Password123" },
           headers: { "HTTP_AUTHORIZATION" => basic_auth_credentials }
       end
 

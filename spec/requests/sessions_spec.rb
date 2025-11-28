@@ -23,12 +23,12 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "POST /session" do
-    let!(:user) { User.create!(email_address: "test@example.com", password: "password123") }
+    let!(:user) { User.create!(email_address: "test@example.com", password: "Password123") }
 
     context "正しい認証情報の場合" do
       it "ログインに成功してリダイレクトされること" do
         post session_path,
-          params: { email_address: "test@example.com", password: "password123" },
+          params: { email_address: "test@example.com", password: "Password123" },
           headers: { "HTTP_AUTHORIZATION" => basic_auth_credentials }
 
         expect(response).to have_http_status(:redirect)
@@ -47,12 +47,12 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "DELETE /session" do
-    let!(:user) { User.create!(email_address: "test@example.com", password: "password123") }
+    let!(:user) { User.create!(email_address: "test@example.com", password: "Password123") }
 
     it "ログアウトしてログインページにリダイレクトされること" do
       # まずログイン
       post session_path,
-        params: { email_address: "test@example.com", password: "password123" },
+        params: { email_address: "test@example.com", password: "Password123" },
         headers: { "HTTP_AUTHORIZATION" => basic_auth_credentials }
 
       # ログアウト

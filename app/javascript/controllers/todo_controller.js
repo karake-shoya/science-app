@@ -8,25 +8,31 @@ export default class extends Controller {
     this.loadTodos()
   }
 
-  addTodo() {
+  async addTodo() {
     const inputTodo = this.inputTodoTarget.value
     if (!inputTodo.trim()) return
 
-    this.createIncompleteTodo(inputTodo)
-    this.inputTodoTarget.value = ''
-    this.saveTodos()
+    try {
+      const response = await this.apiRequest('/todos', 'POST', { todo: { content: inputTodo } })
+      if (response.ok) {
+        const todo = await response.json()
+        this.createIncompleteTodo(todo.content, todo.id)
+        this.inputTodoTarget.value = ''
+      }
+    } catch (error) {
+      console.error('Failed to add todo:', error)
+    }
   }
 
-  createIncompleteTodo(todo) {
-    const { li, div } = this.createTodoElement(todo)
+  createIncompleteTodo(content, id) {
+    const { li, div } = this.createTodoElement(content, id)
 
     const completeButton = this.createButton('Complete', 'bg-blue-300 hover:bg-blue-500', () => {
-      this.moveToComplete(li, div)
+      this.moveToComplete(li, div, id)
     })
 
     const deleteButton = this.createButton('Delete', 'bg-red-300 hover:bg-red-500', () => {
-      this.incompleteListsTarget.removeChild(li)
-      this.saveTodos()
+      this.deleteTodo(li, id)
     })
 
     div.appendChild(completeButton)
@@ -34,21 +40,22 @@ export default class extends Controller {
     this.incompleteListsTarget.appendChild(li)
   }
 
-  createCompleteTodo(todo) {
-    const { li, div } = this.createTodoElement(todo)
+  createCompleteTodo(content, id) {
+    const { li, div } = this.createTodoElement(content, id)
 
-    const backButton = this.createBackButton(li)
+    const backButton = this.createBackButton(li, id)
     div.appendChild(backButton)
     this.completeListsTarget.appendChild(li)
   }
 
-  createTodoElement(todo) {
+  createTodoElement(content, id) {
     const li = document.createElement('li')
     li.className = 'flex items-center justify-between'
+    li.dataset.todoId = id
 
     const p = document.createElement('p')
     p.className = 'flex-grow my-3'
-    p.innerText = todo
+    p.innerText = content
 
     const div = document.createElement('div')
     div.className = 'flex-shrink-0'
@@ -67,37 +74,78 @@ export default class extends Controller {
     return button
   }
 
-  createBackButton(li) {
+  createBackButton(li, id) {
     return this.createButton('back', 'bg-blue-300 hover:bg-blue-500', () => {
-      const todoText = li.querySelector('p').innerText
-      this.createIncompleteTodo(todoText)
-      this.completeListsTarget.removeChild(li)
-      this.saveTodos()
+      this.moveToIncomplete(li, id)
     })
   }
 
-  moveToComplete(li, div) {
-    // 既存のボタンを削除
-    div.innerHTML = ''
-
-    const backButton = this.createBackButton(li)
-    div.appendChild(backButton)
-    this.completeListsTarget.appendChild(li)
-    this.saveTodos()
+  async moveToComplete(li, div, id) {
+    try {
+      const response = await this.apiRequest(`/todos/${id}`, 'PATCH', { todo: { completed: true } })
+      if (response.ok) {
+        div.innerHTML = ''
+        const backButton = this.createBackButton(li, id)
+        div.appendChild(backButton)
+        this.completeListsTarget.appendChild(li)
+      }
+    } catch (error) {
+      console.error('Failed to complete todo:', error)
+    }
   }
 
-  saveTodos() {
-    const incompleteTodos = Array.from(this.incompleteListsTarget.children).map(li => li.querySelector('p').innerText)
-    const completeTodos = Array.from(this.completeListsTarget.children).map(li => li.querySelector('p').innerText)
-    localStorage.setItem('incompleteTodos', JSON.stringify(incompleteTodos))
-    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
+  async moveToIncomplete(li, id) {
+    try {
+      const response = await this.apiRequest(`/todos/${id}`, 'PATCH', { todo: { completed: false } })
+      if (response.ok) {
+        const content = li.querySelector('p').innerText
+        li.remove()
+        this.createIncompleteTodo(content, id)
+      }
+    } catch (error) {
+      console.error('Failed to uncomplete todo:', error)
+    }
   }
 
-  loadTodos() {
-    const incompleteTodos = JSON.parse(localStorage.getItem('incompleteTodos')) || []
-    const completeTodos = JSON.parse(localStorage.getItem('completeTodos')) || []
+  async deleteTodo(li, id) {
+    try {
+      const response = await this.apiRequest(`/todos/${id}`, 'DELETE')
+      if (response.ok) {
+        li.remove()
+      }
+    } catch (error) {
+      console.error('Failed to delete todo:', error)
+    }
+  }
 
-    incompleteTodos.forEach(todo => this.createIncompleteTodo(todo))
-    completeTodos.forEach(todo => this.createCompleteTodo(todo))
+  async loadTodos() {
+    try {
+      const response = await this.apiRequest('/todos', 'GET')
+      if (response.ok) {
+        const data = await response.json()
+        data.incomplete.forEach(todo => this.createIncompleteTodo(todo.content, todo.id))
+        data.complete.forEach(todo => this.createCompleteTodo(todo.content, todo.id))
+      }
+    } catch (error) {
+      console.error('Failed to load todos:', error)
+    }
+  }
+
+  async apiRequest(url, method, body = null) {
+    const options = {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': this.csrfToken
+      }
+    }
+    if (body) {
+      options.body = JSON.stringify(body)
+    }
+    return fetch(url, options)
+  }
+
+  get csrfToken() {
+    return document.querySelector('meta[name="csrf-token"]')?.content
   }
 }

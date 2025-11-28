@@ -1,3 +1,127 @@
-<h1>Name: <%= @user.name %></h1>
-<p>Email: <%= @user.email_address %></p>
-<p>Joined on: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+<div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
+  <div class="mx-auto max-w-2xl px-6 py-10">
+    <!-- プロフィールカード -->
+    <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+      <!-- ヘッダー部分 -->
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-cyan-600 dark:to-indigo-600 px-6 py-8">
+        <div class="flex items-center gap-5">
+          <!-- アバター -->
+          <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl font-bold text-white shadow-lg">
+            <%= @user.name.first.upcase %>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-white tracking-wide"><%= @user.name %></h1>
+            <p class="text-indigo-100 dark:text-cyan-100 text-sm mt-1"><%= @user.email_address %></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ユーザー情報 -->
+      <div class="p-6 space-y-4">
+        <div class="flex items-center gap-4 py-3 px-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl">
+          <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">名前</p>
+            <p class="text-slate-700 dark:text-slate-200 font-semibold"><%= @user.name %></p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 py-3 px-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl">
+          <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">メールアドレス</p>
+            <p class="text-slate-700 dark:text-slate-200 font-semibold"><%= @user.email_address %></p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 py-3 px-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl">
+          <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">登録日</p>
+            <p class="text-slate-700 dark:text-slate-200 font-semibold"><%= @user.created_at.strftime("%Y年%m月%d日") %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 統計カード -->
+    <div class="grid grid-cols-2 gap-4 mt-6">
+      <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl shadow-md dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-cyan-500 dark:to-indigo-500 flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-slate-800 dark:text-white"><%= @user.todos.complete.count %></p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">完了タスク</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl shadow-md dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-slate-800 dark:text-white"><%= @user.todos.incomplete.count %></p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">未完了タスク</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アカウント経過日数 -->
+    <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl shadow-md dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 p-5 mt-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-900/50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">アカウント作成から</p>
+            <p class="text-slate-700 dark:text-slate-200 font-semibold">
+              <%= (Date.current - @user.created_at.to_date).to_i %>日が経過
+            </p>
+          </div>
+        </div>
+        <span class="text-4xl">🎉</span>
+      </div>
+    </div>
+
+    <!-- アクションボタン -->
+    <div class="mt-6 flex gap-3">
+      <%= link_to root_path, class: "flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 bg-indigo-500 dark:bg-cyan-600 text-white font-semibold rounded-xl hover:bg-indigo-600 dark:hover:bg-cyan-700 transition-colors shadow-md" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        ダッシュボードへ
+      <% end %>
+      <button type="button" class="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors shadow-md">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        設定
+      </button>
+    </div>
+  </div>
+</div>

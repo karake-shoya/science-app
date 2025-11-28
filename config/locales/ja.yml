@@ -71,6 +71,11 @@ ja:
       title: "Memo"
       placeholder: "ここにメモを入力..."
     qiita_trends: "Qiitaトレンド"
+    notification:
+      title: "通知"
+      enable_browser: "ブラウザ通知を有効にする"
+      test: "テスト通知"
+      description: "1時間ごと・終業10分前・終業時刻に通知"
 
   sessions:
     new:

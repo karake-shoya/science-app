@@ -1,10 +1,8 @@
 <div data-controller="dashboard">
   <div data-controller="todo">
-    <div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300" style="min-height: calc(100vh - 64px);">
-      <div class="mx-auto px-6 py-8">
-        <h1 class="px-2 pb-8 text-4xl font-bold tracking-tight text-slate-800 dark:text-white">Dashboard</h1>
-
-        <div class="flex flex-row gap-8 justify-center items-stretch mx-auto min-h-full">
+    <div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
+      <div class="mx-auto px-6 py-6">
+        <div class="flex flex-row gap-6 justify-center items-stretch mx-auto min-h-full">
           <!-- 左カラム: 時間管理・Todo横並び、その下にメモ帳 -->
           <div class="flex flex-col w-full max-w-4xl min-h-full flex-1 gap-6">
             <div class="flex flex-row gap-6">
@@ -98,13 +96,13 @@
             </div>
           </div>
           <!-- 右カラム: Qiitaトレンド -->
-          <div class="w-full max-w-2xl min-h-full flex flex-col flex-1">
-            <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg dark:shadow-slate-900/50 h-full flex flex-col border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-shadow duration-300">
-              <h2 class="text-xl font-bold mb-5 text-slate-700 dark:text-slate-100 tracking-wide">🔥 Qiitaトレンド</h2>
-              <ul class="space-y-2 overflow-y-auto flex-1">
+          <div class="w-full max-w-md flex flex-col">
+            <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg dark:shadow-slate-900/50 flex flex-col border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-shadow duration-300 max-h-[calc(100vh-120px)] overflow-hidden">
+              <h2 class="text-lg font-bold mb-3 text-slate-700 dark:text-slate-100 tracking-wide flex-shrink-0">🔥 Qiitaトレンド</h2>
+              <ul class="space-y-1 overflow-y-auto flex-1">
                 <% @qiita_trends.each do |item| %>
-                <li class="p-3.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                  <a href="<%= item.respond_to?(:link) && item.link.respond_to?(:href) ? item.link.href : (item.respond_to?(:link) ? item.link.to_s : '') %>" target="_blank" class="text-[15px] leading-relaxed text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-medium hover:underline decoration-2 underline-offset-4">
+                <li class="py-2 px-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                  <a href="<%= item.respond_to?(:link) && item.link.respond_to?(:href) ? item.link.href : (item.respond_to?(:link) ? item.link.to_s : '') %>" target="_blank" class="text-[13px] leading-snug text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-medium hover:underline decoration-1 underline-offset-2 line-clamp-2">
                     <%= item.title.respond_to?(:content) ? item.title.content : item.title.to_s %>
                   </a>
                 </li>

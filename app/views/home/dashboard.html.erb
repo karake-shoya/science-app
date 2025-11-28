@@ -18,23 +18,14 @@
                 <div class="flex flex-col items-center mb-4 text-base text-gray-700">
                   <form id="start-date-form" class="flex items-center mb-2" method="get">
                     <label for="start-date" class="mr-2">基準日：</label>
-                    <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || '2024-04-01' %>" class="border rounded px-2 py-1" data-dashboard-target="startDateInput" onchange="this.form.submit()">
+                    <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || HomeHelper::DEFAULT_START_DATE %>" class="border rounded px-2 py-1" data-dashboard-target="startDateInput" onchange="this.form.submit()">
                   </form>
-                  <% start_date = Date.parse(params[:start_date].presence || '2024-04-01') rescue Date.parse('2024-04-01') %>
-                  <% today = Time.current.in_time_zone('Asia/Tokyo').to_date %>
-                  <% days_passed = (today - start_date).to_i + 1 %>
-                  <% months_passed = (today.year - start_date.year) * 12 + (today.month - start_date.month) %>
-                  <% day_of_month = today.day - start_date.day + 1 %>
-                  <% if day_of_month <= 0 %>
-                  <% months_passed -= 1 %>
-                  <% prev_month = today.prev_month %>
-                  <% day_of_month = (prev_month.end_of_month.day - start_date.day + 1) + today.day %>
-                  <% end %>
+                  <% elapsed = elapsed_time_from_date(params[:start_date]) %>
                   <div>
-                    <span class="font-semibold"><%= start_date.strftime('%Y/%m/%d') %>から</span>
+                    <span class="font-semibold"><%= elapsed[:start_date].strftime('%Y/%m/%d') %>から</span>
                   </div>
                   <div>
-                    <span class="ml-2"> <%= days_passed %>日 (<%= months_passed %>ヶ月と<%= day_of_month %>日)</span>
+                    <span class="ml-2"> <%= elapsed[:days_passed] %>日 (<%= elapsed[:months_passed] %>ヶ月と<%= elapsed[:day_of_month] %>日)</span>
                   </div>
                 </div>
                 <div class="my-5 text-gray-700 font-medium">

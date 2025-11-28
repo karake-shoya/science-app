@@ -6,14 +6,14 @@ RSpec.describe User, type: :model do
       it '存在しない場合は無効' do
         user = User.new(email_address: nil, password: 'Password123')
         expect(user).not_to be_valid
-        expect(user.errors[:email_address]).to include("can't be blank")
+        expect(user.errors[:email_address]).to include("を入力してください")
       end
 
       it '重複している場合は無効' do
         User.create!(email_address: 'test@example.com', password: 'Password123')
         user = User.new(email_address: 'test@example.com', password: 'Password123')
         expect(user).not_to be_valid
-        expect(user.errors[:email_address]).to include('has already been taken')
+        expect(user.errors[:email_address]).to include('はすでに使用されています')
       end
 
       it '大文字小文字が異なっても重複している場合は無効' do

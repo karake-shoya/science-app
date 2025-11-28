@@ -1,0 +1,153 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        blank: "を入力してください"
+        taken: "はすでに使用されています"
+        invalid: "は有効ではありません"
+        too_short: "は%{count}文字以上で入力してください"
+        too_long: "は%{count}文字以内で入力してください"
+        confirmation: "が一致しません"
+        not_a_number: "は数値で入力してください"
+        greater_than: "は%{count}より大きい値にしてください"
+        less_than: "は%{count}より小さい値にしてください"
+
+  errors:
+    messages:
+      blank: "を入力してください"
+      taken: "はすでに使用されています"
+      invalid: "は有効ではありません"
+
+  app_name: "ScienceApp"
+
+  common:
+    save: "保存"
+    add: "追加"
+    reset: "リセット"
+    settings: "設定"
+    copy: "コピー"
+    copied: "コピーしました"
+    loading: "読み込み中..."
+    not_set: "(未設定)"
+
+  header:
+    dashboard: "ダッシュボード"
+    materials: "教材"
+    analytics: "アナリティクス"
+    my_page: "マイページ"
+    logout: "ログアウト"
+    toggle_theme: "テーマ切替"
+    notifications: "通知"
+    open_menu: "メニューを開く"
+    open_user_menu: "ユーザーメニューを開く"
+
+  home:
+    index:
+      tagline: "時間管理とプロジェクト管理を支援する"
+      tagline_sub: "Webアプリケーション"
+      feature_time: "リアルタイムでの勤務時間・タスク管理"
+      feature_analytics: "ClickUp連携による稼働分析・アナリティクス"
+      feature_materials: "学習教材・チートシートの閲覧"
+      sign_up: "新規登録はこちら"
+      sign_in: "ログインはこちら"
+      copyright: "ScienceApp. All rights reserved."
+
+  dashboard:
+    reference_date: "基準日"
+    days_passed: "経過日数"
+    days: "日"
+    months: "ヶ月"
+    start_time: "開始時刻"
+    end_time: "終了時刻"
+    working_hours: "稼働時間"
+    include_break: "休憩時間を含む"
+    current_time: "現在時刻"
+    todo:
+      title: "TODO"
+      placeholder: "新しいTODOを入力..."
+      incomplete: "Incomplete"
+      complete: "Complete"
+    memo:
+      title: "Memo"
+      placeholder: "ここにメモを入力..."
+    qiita_trends: "Qiitaトレンド"
+
+  sessions:
+    new:
+      title: "ログイン"
+      description: "アカウントにサインインしてください"
+      email: "メールアドレス"
+      password: "パスワード"
+      password_placeholder: "パスワードを入力"
+      submit: "ログイン"
+      forgot_password: "パスワードをお忘れの方"
+      sign_up_link: "新規登録はこちら"
+
+  users:
+    new:
+      title: "新規登録"
+      description: "アカウントを作成してください"
+      name: "名前"
+      name_placeholder: "山田 太郎"
+      email: "メールアドレス"
+      password: "パスワード"
+      password_placeholder: "8文字以上で入力"
+      password_confirmation: "パスワード（確認）"
+      password_confirmation_placeholder: "パスワードを再入力"
+      submit: "アカウント作成"
+      sign_in_link: "すでにアカウントをお持ちの方はこちら"
+    show:
+      name: "名前"
+      email: "メールアドレス"
+      registered_at: "登録日"
+      completed_tasks: "完了タスク"
+      incomplete_tasks: "未完了タスク"
+      days_since_registration: "アカウント作成から"
+      days_passed: "%{days}日が経過"
+      go_to_dashboard: "ダッシュボードへ"
+
+  materials:
+    title: "Git Commands"
+    command: "Command"
+    description: "説明"
+    categories:
+      basic: "基本操作"
+      staging: "ステージング"
+      commit: "コミット"
+      branch: "ブランチ"
+      merge_rebase: "マージ・リベース"
+      remote: "リモート"
+      history: "履歴"
+      stash: "スタッシュ"
+    commands:
+      init: "新しいリポジトリを初期化"
+      clone: "リポジトリをクローン"
+      status: "作業ディレクトリの状態を表示"
+      add_all: "全ての変更をステージング"
+      add_file: "特定のファイルをステージング"
+      reset: "ステージングを取り消し"
+      commit: "メッセージ付きでコミット"
+      commit_amend: "直前のコミットを修正"
+      branch: "ブランチ一覧を表示"
+      branch_create: "新しいブランチを作成"
+      checkout: "ブランチを切り替え"
+      checkout_new: "新ブランチを作成して切り替え"
+      branch_delete: "ブランチを削除"
+      merge: "ブランチをマージ"
+      rebase: "ブランチをリベース"
+      pull: "リモートから取得してマージ"
+      push: "リモートにプッシュ"
+      push_upstream: "上流ブランチを設定してプッシュ"
+      fetch: "リモートの変更を取得（マージなし）"
+      log: "コミット履歴を表示"
+      log_oneline: "コミット履歴を1行で表示"
+      diff: "変更差分を表示"
+      stash: "変更を一時保存"
+      stash_pop: "スタッシュを適用して削除"
+      stash_list: "スタッシュ一覧を表示"
+
+  time:
+    formats:
+      date_with_day: "%Y/%m/%d (%A)"
+      date_japanese: "%Y年%m月%d日"
+

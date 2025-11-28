@@ -7,55 +7,66 @@
           <div class="flex flex-col w-full max-w-4xl min-h-full flex-1 gap-6">
             <div class="flex flex-row gap-6">
               <!-- 時間管理 -->
-              <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg dark:shadow-slate-900/50 w-1/2 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-shadow duration-300">
-                <div class="flex flex-col text-center justify-center mb-6">
-                  <p class="text-lg font-medium text-slate-600 dark:text-slate-300 tracking-wide"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d (%A)') %></p>
-                  <p class="mt-2"><span id="current-time" class="font-mono text-4xl font-semibold text-indigo-600 dark:text-cyan-400 tracking-wider" data-dashboard-target="currentTime"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%H:%M:%S') %></span></p>
+              <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg dark:shadow-slate-900/50 w-1/2 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-shadow duration-300">
+                <!-- 日付・時刻 -->
+                <div class="text-center mb-5 pb-5 border-b border-slate-200 dark:border-slate-700">
+                  <p class="text-sm font-medium text-slate-500 dark:text-slate-400"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d (%A)') %></p>
+                  <p class="mt-1"><span id="current-time" class="font-mono text-3xl font-bold text-indigo-600 dark:text-cyan-400" data-dashboard-target="currentTime"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%H:%M:%S') %></span></p>
                 </div>
-                <!-- 指定日からの経過日数・月日表示（指定日入力対応） -->
-                <div class="flex flex-col items-center mb-6 text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
-                  <form id="start-date-form" class="flex items-center mb-3" method="get">
-                    <label for="start-date" class="mr-3 font-medium">基準日：</label>
-                    <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || HomeHelper::DEFAULT_START_DATE %>" class="border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-100 text-[15px] focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all" data-dashboard-target="startDateInput" onchange="this.form.submit()">
+
+                <!-- 経過日数 -->
+                <div class="mb-5 pb-5 border-b border-slate-200 dark:border-slate-700">
+                  <form id="start-date-form" class="flex items-center justify-between mb-3" method="get">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">基準日</span>
+                    <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || HomeHelper::DEFAULT_START_DATE %>" class="border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-100 text-sm focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent" data-dashboard-target="startDateInput" onchange="this.form.submit()">
                   </form>
                   <% elapsed = elapsed_time_from_date(params[:start_date]) %>
-                  <div class="mt-2 px-5 py-3 bg-indigo-50 dark:bg-slate-700/50 rounded-xl">
-                    <span class="font-semibold text-indigo-700 dark:text-cyan-400"><%= elapsed[:start_date].strftime('%Y/%m/%d') %>から</span>
-                    <span class="ml-2 text-slate-700 dark:text-slate-200 font-medium"><%= elapsed[:days_passed] %>日 (<%= elapsed[:months_passed] %>ヶ月と<%= elapsed[:day_of_month] %>日)</span>
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="text-slate-600 dark:text-slate-300">経過日数</span>
+                    <span class="font-semibold text-indigo-600 dark:text-cyan-400"><%= elapsed[:days_passed] %>日 <span class="text-slate-500 dark:text-slate-400 font-normal">(<%= elapsed[:months_passed] %>ヶ月<%= elapsed[:day_of_month] %>日)</span></span>
                   </div>
                 </div>
-                <div class="space-y-5 text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
-                  <div class="flex items-center">
-                    <label for="time-input" class="block mr-3 font-medium">Starting time：</label>
-                    <input type="time" id="time-input" data-dashboard-target="timeInput" class="block w-32 rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-100 shadow-sm focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent text-[15px] py-2 transition-all font-mono">
-                    <button id="save-time" data-action="click->dashboard#saveInputTime" class="ml-3 px-5 py-2 bg-indigo-500 dark:bg-cyan-600 text-white rounded-lg hover:bg-indigo-600 dark:hover:bg-cyan-700 transition-colors font-semibold text-sm shadow-md hover:shadow-lg">Save</button>
-                  </div>
-                  <div class="flex items-center py-2 px-4 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
-                    <span class="font-medium mr-3">Saved time：</span>
-                    <span id="starting-time" data-dashboard-target="startingTime" class="font-mono text-xl font-semibold text-indigo-600 dark:text-cyan-400">--:--</span>
-                  </div>
-                  <div class="flex items-center flex-wrap gap-2">
-                    <span class="font-medium">Finished time：</span>
-                    <span id="end-time" data-dashboard-target="endTime" class="font-mono text-xl font-semibold text-indigo-600 dark:text-cyan-400 mr-2">--:--</span>
-                    <div class="flex gap-1">
-                      <button type="button" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500 text-xs font-semibold transition-colors" data-action="click->dashboard#add30minToEndTime">
-                        +30m
-                      </button>
-                      <button type="button" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500 text-xs font-semibold transition-colors" data-action="click->dashboard#add1hToEndTime">
-                        +1h
-                      </button>
-                      <button type="button" class="px-3 py-1.5 bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 rounded-lg hover:bg-rose-200 dark:hover:bg-rose-800/50 text-xs font-semibold transition-colors" data-action="click->dashboard#resetEndTimeOffset">
-                        Reset
-                      </button>
+
+                <!-- 時間入力・表示 -->
+                <div class="space-y-3">
+                  <!-- 開始時刻入力 -->
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">開始時刻</span>
+                    <div class="flex items-center gap-2">
+                      <input type="time" id="time-input" data-dashboard-target="timeInput" class="w-28 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-100 text-sm py-1.5 px-2 font-mono focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent">
+                      <button id="save-time" data-action="click->dashboard#saveInputTime" class="px-3 py-1.5 bg-indigo-500 dark:bg-cyan-600 text-white rounded-lg hover:bg-indigo-600 dark:hover:bg-cyan-700 transition-colors font-semibold text-xs">Save</button>
                     </div>
                   </div>
-                  <div class="flex items-center py-3 px-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
-                    <span class="font-medium mr-3">Time tracked：</span>
-                    <span id="time-tracked" data-dashboard-target="timeTracked" class="font-mono text-2xl font-bold text-emerald-600 dark:text-emerald-400">--:--</span>
+
+                  <!-- 保存済み開始時刻 -->
+                  <div class="flex items-center justify-between py-2 px-3 bg-slate-50 dark:bg-slate-700/40 rounded-lg">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">保存済み</span>
+                    <span id="starting-time" data-dashboard-target="startingTime" class="font-mono text-lg font-bold text-indigo-600 dark:text-cyan-400">--:--</span>
                   </div>
-                  <div class="flex items-center">
-                    <input type="checkbox" id="break-checkbox" data-dashboard-target="breakCheckbox" data-action="change->dashboard#toggleBreakCheckbox" class="mr-3 w-5 h-5 text-indigo-600 dark:text-cyan-500 rounded focus:ring-indigo-500 dark:focus:ring-cyan-500">
-                    <label for="break-checkbox" class="text-[15px] font-medium cursor-pointer">Include break time</label>
+
+                  <!-- 終了時刻 -->
+                  <div class="flex items-center justify-between py-2 px-3 bg-slate-50 dark:bg-slate-700/40 rounded-lg">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">終了時刻</span>
+                    <div class="flex items-center gap-2">
+                      <span id="end-time" data-dashboard-target="endTime" class="font-mono text-lg font-bold text-indigo-600 dark:text-cyan-400">--:--</span>
+                      <div class="flex gap-1">
+                        <button type="button" class="px-2 py-1 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-200 rounded text-xs font-medium hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors" data-action="click->dashboard#add30minToEndTime">+30m</button>
+                        <button type="button" class="px-2 py-1 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-200 rounded text-xs font-medium hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors" data-action="click->dashboard#add1hToEndTime">+1h</button>
+                        <button type="button" class="px-2 py-1 bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-300 rounded text-xs font-medium hover:bg-rose-200 dark:hover:bg-rose-800/50 transition-colors" data-action="click->dashboard#resetEndTimeOffset">Reset</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 稼働時間 -->
+                  <div class="flex items-center justify-between py-3 px-3 bg-emerald-50 dark:bg-emerald-900/30 rounded-lg">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">稼働時間</span>
+                    <span id="time-tracked" data-dashboard-target="timeTracked" class="font-mono text-xl font-bold text-emerald-600 dark:text-emerald-400">--:--</span>
+                  </div>
+
+                  <!-- 休憩チェック -->
+                  <div class="flex items-center justify-between py-2 px-3 bg-slate-50 dark:bg-slate-700/40 rounded-lg">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">休憩時間を含む</span>
+                    <input type="checkbox" id="break-checkbox" data-dashboard-target="breakCheckbox" data-action="change->dashboard#toggleBreakCheckbox" class="w-5 h-5 text-indigo-600 dark:text-cyan-500 rounded focus:ring-indigo-500 dark:focus:ring-cyan-500">
                   </div>
                 </div>
               </div>

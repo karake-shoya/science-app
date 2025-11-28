@@ -1,0 +1,47 @@
+<div class="mt-10 p-8">
+  <h2 class="text-xl font-bold text-center mb-4">タスク一覧</h2>
+  <table class="table-auto w-full bg-white rounded-lg shadow-lg">
+    <thead>
+      <tr class="bg-gray-300">
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Assignees</th>
+        <th class="px-4 py-2">Status</th>
+        <th class="px-4 py-2">Created_at</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if tasks.present? %>
+      <% tasks.each do |task| %>
+      <tr class="border-t">
+        <td class="px-4 py-2"><%= task["name"] %></td>
+        <td class="px-4 py-2">
+          <% if task["assignees"].present? %>
+          <% task["assignees"].each do |assignee| %>
+          <div class="flex items-center space-x-2 mb-1">
+            <img src="<%= assignee["profilePicture"] %>" alt="<%= assignee["username"] %>" class="w-8 h-8 rounded-full">
+            <span><%= assignee["username"] %></span>
+          </div>
+          <% end %>
+          <% else %>
+          未設定
+          <% end %>
+        </td>
+        <td class="px-4 py-2"><%= task["status"]["status"] %></td>
+        <td class="px-4 py-2">
+          <% if task["date_created"].present? %>
+          <%= Time.at(task["date_created"].to_i / 1000).strftime('%Y-%m-%d') %>
+          <% else %>
+          --
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+      <% else %>
+      <tr>
+        <td colspan="4" class="px-4 py-2 text-center">タスクが見つかりません。</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

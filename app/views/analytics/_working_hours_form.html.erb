@@ -1,0 +1,90 @@
+<div class="mt-10 max-w-lg mx-auto">
+  <h2 class="text-xl font-bold text-center mb-4">稼働時間計算</h2>
+  <div class="bg-white p-6 rounded-lg shadow-lg">
+    <form method="get" action="<%= analytics_path %>">
+      <div class="mb-4">
+        <label for="total_hours_user1" class="block text-gray-700 font-bold mb-2">User1の累計稼働時間（h）</label>
+        <input type="number" step="0.01" name="total_hours_user1" id="total_hours_user1" value="<%= calculator.hours_u1 %>" class="w-full p-2 border rounded">
+      </div>
+      <div class="mb-4">
+        <label for="total_hours_user2" class="block text-gray-700 font-bold mb-2">User2の累計稼働時間（h）</label>
+        <input type="number" step="0.01" name="total_hours_user2" id="total_hours_user2" value="<%= calculator.hours_u2 %>" class="w-full p-2 border rounded">
+      </div>
+      <div class="mb-4">
+        <label for="subtract_days" class="block text-gray-700 font-bold mb-2">営業日数から減らす日数（有給等）</label>
+        <input type="number" name="subtract_days" id="subtract_days" value="<%= calculator.subtract_days %>" min="0" class="w-full p-2 border rounded">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">計算</button>
+      <button type="submit" name="calculate_until" value="yesterday" class="bg-gray-500 text-white px-4 py-2 rounded">昨日の日付で計算</button>
+    </form>
+    <table class="table-auto w-full bg-white rounded-lg shadow-lg mt-4">
+      <tbody>
+        <tr class="border-t">
+          <td class="px-4 py-2">日付</td>
+          <td class="px-4 py-2"><%= calculator.today_formatted %></td>
+        </tr>
+        <tr class="border-t">
+          <td class="px-4 py-2">営業日数</td>
+          <td class="px-4 py-2">
+            <%= calculator.business_days %> 日
+            <% if calculator.subtract_days > 0 %>
+            <span class="ml-2 text-sm text-gray-500">（-<%= calculator.subtract_days %>日 → <%= calculator.business_days_adjusted %>日）</span>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="border-t">
+          <td class="px-4 py-2">残り営業日数</td>
+          <td class="px-4 py-2"><%= calculator.remaining_days %> 日</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-lg mt-4">累計稼働時間： <span class="font-bold"><%= calculator.current_total.round(1) %> h</span><span class="text-sm"> (現在)</p>
+    <table class="table-auto w-full bg-white rounded-lg shadow-lg mt-4">
+      <thead>
+        <tr class="bg-gray-300">
+          <th class="px-4 py-2">項目</th>
+          <th class="px-4 py-2">User1</th>
+          <th class="px-4 py-2">User2</th>
+          <th class="px-4 py-2">合計</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr class="border-t">
+          <td class="px-4 py-2 text-left">
+            <div class="flex items-center">
+              <span>稼働時間</span>
+              <span class="ml-2 text-sm text-gray-500">(h/日)</span>
+            </div>
+          </td>
+          <td class="px-4 py-2"><%= calculator.per_day_u1.round(1) %></td>
+          <td class="px-4 py-2"><%= calculator.per_day_u2.round(1) %></td>
+          <td class="px-4 py-2 font-bold"><%= (calculator.per_day_u1 + calculator.per_day_u2).round(1) %></td>
+        </tr>
+        <tr class="border-t">
+          <td class="px-4 py-2 text-left">
+            <div class="flex items-center">
+              <span>増加予測</span>
+              <span class="ml-2 text-sm text-gray-500">(h/月)</span>
+            </div>
+          </td>
+          <td class="px-4 py-2"><%= calculator.predicted_u1.round(1) %></td>
+          <td class="px-4 py-2"><%= calculator.predicted_u2.round(1) %></td>
+          <td class="px-4 py-2 font-bold"><%= (calculator.predicted_u1 + calculator.predicted_u2).round(1) %></td>
+        </tr>
+        <tr class="border-t-3 border-double">
+          <td class="px-4 py-2 text-left">
+            <div class="flex items-center">
+              <span>累計予測</span>
+              <span class="ml-2 text-sm text-gray-500">(h/月)</span>
+            </div>
+          </td>
+          <td class="px-4 py-2"><%= calculator.final_u1.round(1) %></td>
+          <td class="px-4 py-2"><%= calculator.final_u2.round(1) %></td>
+          <td class="px-4 py-2 font-bold"><%= calculator.total_final.round(1) %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-lg mt-4">累計稼働時間： <span class="font-bold"><%= calculator.total_final.round(1) %> h</span><span class="text-sm"> (予測)</p>
+  </div>
+</div>
+

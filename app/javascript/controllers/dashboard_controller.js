@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="dashboard"
 export default class extends Controller {
   static targets = [ "currentTime", "timeInput", "startingTime", "localTime", "timeTracked", "breakCheckbox", "endTime" ]
+  static outlets = [ "notification" ]
 
   connect() {
     console.log("dashboard_controller connected")
@@ -12,10 +13,11 @@ export default class extends Controller {
       this.updateTime()
     }, 1000);
 
-    if (this.startingTarget != "--:--"){
-      const savedTime = localStorage.getItem('startingTime');
+    const savedTime = localStorage.getItem('startingTime');
+    if (savedTime && savedTime !== "--:--") {
       this.startingTimeTarget.textContent = savedTime;
       this.timeInputTarget.value = savedTime;
+      this.startNotificationTimer(savedTime);
     }
 
     if(this.breakCheckboxTarget.checked) {
@@ -50,6 +52,13 @@ export default class extends Controller {
     const timeInput = this.timeInputTarget.value;
     this.startingTimeTarget.textContent = timeInput;
     localStorage.setItem('startingTime', timeInput);
+    this.startNotificationTimer(timeInput);
+  }
+
+  startNotificationTimer(startTime) {
+    if (this.hasNotificationOutlet) {
+      this.notificationOutlet.startNotificationTimer(startTime);
+    }
   }
 
   timeTrackedCalculation() {

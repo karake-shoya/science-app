@@ -52,6 +52,11 @@ en:
       title: "Memo"
       placeholder: "Enter memo here..."
     qiita_trends: "Qiita Trends"
+    notification:
+      title: "Notification"
+      enable_browser: "Enable browser notifications"
+      test: "Test notification"
+      description: "Hourly, 10min before end, and end time alerts"
 
   sessions:
     new:

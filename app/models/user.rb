@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :todos, dependent: :destroy
 
   EMAIL_MAX_LENGTH = 255
   PASSWORD_MIN_LENGTH = 8

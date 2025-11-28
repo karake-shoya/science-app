@@ -1,12 +1,11 @@
-<!-- filepath: app/views/home/index.html.erb -->
 <div class="bg-gradient-to-br from-blue-100 via-white to-pink-100 flex flex-col justify-center items-center" style="min-height: calc(100vh - 64px);">
   <div class=" bg-white bg-opacity-90 shadow-2xl rounded-3xl px-10 py-12 max-w-lg w-full text-center">
     <div class="flex flex-col items-center mb-6">
-      <img src="<%= asset_path('header/azarashi.png') %>" alt="ScienceApp Logo" class="w-20 h-20 mb-4 rounded-full shadow-lg border-4 border-blue-200">
-      <h1 class="text-4xl font-extrabold text-blue-700 mb-2 tracking-tight">ScienceApp</h1>
+      <img src="<%= asset_path('header/azarashi.png') %>" alt="<%= t('app_name') %> Logo" class="w-20 h-20 mb-4 rounded-full shadow-lg border-4 border-blue-200">
+      <h1 class="text-4xl font-extrabold text-blue-700 mb-2 tracking-tight"><%= t('app_name') %></h1>
       <p class="text-lg text-gray-600 font-medium">
-        時間管理とプロジェクト管理を支援する<br>
-        Webアプリケーション
+        <%= t('home.index.tagline') %><br>
+        <%= t('home.index.tagline_sub') %>
       </p>
     </div>
     <div class="my-8">
@@ -16,29 +15,29 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"></path>
             <circle cx="12" cy="12" r="10"></circle>
           </svg>
-          <span>リアルタイムでの勤務時間・タスク管理</span>
+          <span><%= t('home.index.feature_time') %></span>
         </li>
         <li class="flex items-center">
           <svg class="w-5 h-5 text-pink-400 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2a4 4 0 0 1 4-4h4"></path>
             <circle cx="12" cy="12" r="10"></circle>
           </svg>
-          <span>ClickUp連携による稼働分析・アナリティクス</span>
+          <span><%= t('home.index.feature_analytics') %></span>
         </li>
         <li class="flex items-center">
           <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
           </svg>
-          <span>学習教材・チートシートの閲覧</span>
+          <span><%= t('home.index.feature_materials') %></span>
         </li>
       </ul>
     </div>
     <div class="flex flex-col gap-4 mt-8">
-      <%= link_to "新規登録はこちら", new_user_path, class: "w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow transition" %>
-      <%= link_to "ログインはこちら", new_session_path, class: "w-full py-3 rounded-lg bg-white border border-blue-600 text-blue-700 font-bold hover:bg-blue-50 shadow transition" %>
+      <%= link_to t('home.index.sign_up'), new_user_path, class: "w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow transition" %>
+      <%= link_to t('home.index.sign_in'), new_session_path, class: "w-full py-3 rounded-lg bg-white border border-blue-600 text-blue-700 font-bold hover:bg-blue-50 shadow transition" %>
     </div>
     <div class="mt-8 text-xs text-gray-400">
-      &copy; <%= Time.current.year %> ScienceApp. All rights reserved.
+      &copy; <%= Time.current.year %> <%= t('home.index.copyright') %>
     </div>
   </div>
 </div>

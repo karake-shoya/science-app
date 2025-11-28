@@ -3,9 +3,9 @@
     <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 p-8">
       <!-- ロゴ・タイトル -->
       <div class="text-center mb-8">
-        <img src="<%= asset_path('header/azarashi.png') %>" alt="ScienceApp Logo" class="w-16 h-16 mx-auto mb-4 rounded-full shadow-lg border-4 border-indigo-200 dark:border-cyan-700">
-        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">ログイン</h1>
-        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">アカウントにサインインしてください</p>
+        <img src="<%= asset_path('header/azarashi.png') %>" alt="<%= t('app_name') %> Logo" class="w-16 h-16 mx-auto mb-4 rounded-full shadow-lg border-4 border-indigo-200 dark:border-cyan-700">
+        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight"><%= t('sessions.new.title') %></h1>
+        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400"><%= t('sessions.new.description') %></p>
       </div>
 
       <!-- フラッシュメッセージ -->
@@ -19,24 +19,24 @@
       <!-- フォーム -->
       <%= form_with url: session_url, class: "space-y-5" do |form| %>
         <div>
-          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">メールアドレス</label>
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"><%= t('sessions.new.email') %></label>
           <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "example@email.com", value: params[:email_address], class: "block w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all text-sm" %>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">パスワード</label>
-          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "パスワードを入力", maxlength: 72, class: "block w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all text-sm" %>
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"><%= t('sessions.new.password') %></label>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: t('sessions.new.password_placeholder'), maxlength: 72, class: "block w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all text-sm" %>
         </div>
 
         <div class="pt-2">
-          <%= form.submit "ログイン", class: "w-full py-3 px-4 bg-indigo-500 dark:bg-cyan-600 hover:bg-indigo-600 dark:hover:bg-cyan-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 dark:shadow-cyan-500/30 transition-all duration-200 cursor-pointer text-sm tracking-wide" %>
+          <%= form.submit t('sessions.new.submit'), class: "w-full py-3 px-4 bg-indigo-500 dark:bg-cyan-600 hover:bg-indigo-600 dark:hover:bg-cyan-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 dark:shadow-cyan-500/30 transition-all duration-200 cursor-pointer text-sm tracking-wide" %>
         </div>
       <% end %>
 
       <!-- リンク -->
       <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700 space-y-3 text-center">
-        <%= link_to "パスワードをお忘れの方", new_password_path, class: "block text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" %>
-        <%= link_to "新規登録はこちら", new_user_path, class: "block text-sm font-medium text-indigo-600 dark:text-cyan-400 hover:text-indigo-700 dark:hover:text-cyan-300 transition-colors" %>
+        <%= link_to t('sessions.new.forgot_password'), new_password_path, class: "block text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" %>
+        <%= link_to t('sessions.new.sign_up_link'), new_user_path, class: "block text-sm font-medium text-indigo-600 dark:text-cyan-400 hover:text-indigo-700 dark:hover:text-cyan-300 transition-colors" %>
       </div>
     </div>
   </div>

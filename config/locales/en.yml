@@ -1,31 +1,133 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  app_name: "ScienceApp"
+
+  common:
+    save: "Save"
+    add: "Add"
+    reset: "Reset"
+    settings: "Settings"
+    copy: "Copy"
+    copied: "Copied"
+    loading: "Loading..."
+    not_set: "(Not set)"
+
+  header:
+    dashboard: "Dashboard"
+    materials: "Materials"
+    analytics: "Analytics"
+    my_page: "My Page"
+    logout: "Logout"
+    toggle_theme: "Toggle theme"
+    notifications: "View notifications"
+    open_menu: "Open main menu"
+    open_user_menu: "Open user menu"
+
+  home:
+    index:
+      tagline: "Web application for"
+      tagline_sub: "time and project management"
+      feature_time: "Real-time work hours and task management"
+      feature_analytics: "Work analysis with ClickUp integration"
+      feature_materials: "Learning materials and cheat sheets"
+      sign_up: "Sign up"
+      sign_in: "Sign in"
+      copyright: "ScienceApp. All rights reserved."
+
+  dashboard:
+    reference_date: "Reference date"
+    days_passed: "Days passed"
+    days: "days"
+    months: "months"
+    start_time: "Start time"
+    end_time: "End time"
+    working_hours: "Working hours"
+    include_break: "Include break time"
+    current_time: "Current time"
+    todo:
+      title: "TODO"
+      placeholder: "Enter new TODO..."
+      incomplete: "Incomplete"
+      complete: "Complete"
+    memo:
+      title: "Memo"
+      placeholder: "Enter memo here..."
+    qiita_trends: "Qiita Trends"
+
+  sessions:
+    new:
+      title: "Sign in"
+      description: "Sign in to your account"
+      email: "Email address"
+      password: "Password"
+      password_placeholder: "Enter password"
+      submit: "Sign in"
+      forgot_password: "Forgot password?"
+      sign_up_link: "Sign up"
+
+  users:
+    new:
+      title: "Sign up"
+      description: "Create your account"
+      name: "Name"
+      name_placeholder: "John Doe"
+      email: "Email address"
+      password: "Password"
+      password_placeholder: "At least 8 characters"
+      password_confirmation: "Confirm password"
+      password_confirmation_placeholder: "Re-enter password"
+      submit: "Create account"
+      sign_in_link: "Already have an account? Sign in"
+    show:
+      name: "Name"
+      email: "Email address"
+      registered_at: "Registered on"
+      completed_tasks: "Completed tasks"
+      incomplete_tasks: "Incomplete tasks"
+      days_since_registration: "Since registration"
+      days_passed: "%{days} days"
+      go_to_dashboard: "Go to Dashboard"
+
+  materials:
+    title: "Git Commands"
+    command: "Command"
+    description: "Description"
+    categories:
+      basic: "Basic Operations"
+      staging: "Staging"
+      commit: "Commit"
+      branch: "Branch"
+      merge_rebase: "Merge & Rebase"
+      remote: "Remote"
+      history: "History"
+      stash: "Stash"
+    commands:
+      init: "Initialize a new repository"
+      clone: "Clone a repository"
+      status: "Show working directory status"
+      add_all: "Stage all changes"
+      add_file: "Stage specific file"
+      reset: "Unstage file"
+      commit: "Commit with message"
+      commit_amend: "Amend last commit"
+      branch: "List branches"
+      branch_create: "Create new branch"
+      checkout: "Switch branches"
+      checkout_new: "Create and switch to new branch"
+      branch_delete: "Delete branch"
+      merge: "Merge branch"
+      rebase: "Rebase branch"
+      pull: "Fetch and merge from remote"
+      push: "Push to remote"
+      push_upstream: "Set upstream and push"
+      fetch: "Fetch from remote (no merge)"
+      log: "Show commit history"
+      log_oneline: "Show commit history (one line)"
+      diff: "Show changes"
+      stash: "Stash changes"
+      stash_pop: "Apply and drop stash"
+      stash_list: "List stashes"
+
+  time:
+    formats:
+      date_with_day: "%Y/%m/%d (%A)"
+      date_japanese: "%B %d, %Y"

@@ -1,181 +1,181 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300" data-controller="clipboard">
   <div class="mx-auto max-w-5xl px-6 py-6">
-    <h1 class="text-3xl font-bold tracking-tight text-slate-800 dark:text-white mb-6">Git Commands</h1>
+    <h1 class="text-3xl font-bold tracking-tight text-slate-800 dark:text-white mb-6"><%= t('materials.title') %></h1>
 
     <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead>
             <tr class="bg-slate-100 dark:bg-slate-700/50 border-b border-slate-200 dark:border-slate-600">
-              <th class="px-6 py-4 text-left text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Command</th>
-              <th class="px-6 py-4 text-left text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider">説明</th>
-              <th class="px-4 py-4 text-center text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider w-20">Copy</th>
+              <th class="px-6 py-4 text-left text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider"><%= t('materials.command') %></th>
+              <th class="px-6 py-4 text-left text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider"><%= t('materials.description') %></th>
+              <th class="px-4 py-4 text-center text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider w-20"><%= t('common.copy') %></th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
             <!-- 基本操作 -->
             <tr class="bg-indigo-50/50 dark:bg-indigo-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-indigo-700 dark:text-indigo-400">📂 基本操作</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-indigo-700 dark:text-indigo-400">📂 <%= t('materials.categories.basic') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git init</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">新しいリポジトリを初期化</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git init" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.init') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git init" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git clone &lt;url&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">リポジトリをクローン</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git clone " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.clone') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git clone " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git status</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">作業ディレクトリの状態を表示</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git status" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.status') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git status" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- ステージング -->
             <tr class="bg-emerald-50/50 dark:bg-emerald-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-emerald-700 dark:text-emerald-400">📦 ステージング</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-emerald-700 dark:text-emerald-400">📦 <%= t('materials.categories.staging') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git add .</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">全ての変更をステージング</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git add ." class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.add_all') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git add ." class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git add &lt;file&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">特定のファイルをステージング</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git add " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.add_file') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git add " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git reset &lt;file&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">ステージングを取り消し</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git reset " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.reset') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git reset " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- コミット -->
             <tr class="bg-amber-50/50 dark:bg-amber-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-amber-700 dark:text-amber-400">💾 コミット</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-amber-700 dark:text-amber-400">💾 <%= t('materials.categories.commit') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git commit -m "msg"</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">メッセージ付きでコミット</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git commit -m &quot;&quot;" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.commit') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git commit -m &quot;&quot;" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git commit --amend</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">直前のコミットを修正</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git commit --amend" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.commit_amend') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git commit --amend" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- ブランチ -->
             <tr class="bg-purple-50/50 dark:bg-purple-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-purple-700 dark:text-purple-400">🌿 ブランチ</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-purple-700 dark:text-purple-400">🌿 <%= t('materials.categories.branch') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git branch</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">ブランチ一覧を表示</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git branch" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.branch') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git branch" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git branch &lt;name&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">新しいブランチを作成</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git branch " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.branch_create') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git branch " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git checkout &lt;branch&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">ブランチを切り替え</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git checkout " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.checkout') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git checkout " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git checkout -b &lt;name&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">新ブランチを作成して切り替え</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git checkout -b " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.checkout_new') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git checkout -b " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git branch -d &lt;name&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">ブランチを削除</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git branch -d " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.branch_delete') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git branch -d " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- マージ・リベース -->
             <tr class="bg-rose-50/50 dark:bg-rose-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-rose-700 dark:text-rose-400">🔀 マージ・リベース</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-rose-700 dark:text-rose-400">🔀 <%= t('materials.categories.merge_rebase') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git merge &lt;branch&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">ブランチをマージ</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git merge " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.merge') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git merge " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git rebase &lt;branch&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">ブランチをリベース</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git rebase " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.rebase') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git rebase " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- リモート -->
             <tr class="bg-cyan-50/50 dark:bg-cyan-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-cyan-700 dark:text-cyan-400">🌐 リモート</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-cyan-700 dark:text-cyan-400">🌐 <%= t('materials.categories.remote') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git pull</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">リモートから取得してマージ</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git pull" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.pull') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git pull" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git push</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">リモートにプッシュ</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git push" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.push') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git push" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git push -u origin &lt;branch&gt;</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">上流ブランチを設定してプッシュ</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git push -u origin " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.push_upstream') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git push -u origin " class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git fetch</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">リモートの変更を取得（マージなし）</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git fetch" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.fetch') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git fetch" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- 履歴 -->
             <tr class="bg-orange-50/50 dark:bg-orange-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-orange-700 dark:text-orange-400">📜 履歴</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-orange-700 dark:text-orange-400">📜 <%= t('materials.categories.history') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git log</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">コミット履歴を表示</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git log" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.log') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git log" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git log --oneline</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">コミット履歴を1行で表示</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git log --oneline" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.log_oneline') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git log --oneline" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git diff</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">変更差分を表示</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git diff" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.diff') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git diff" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
 
             <!-- スタッシュ -->
             <tr class="bg-teal-50/50 dark:bg-teal-900/20">
-              <td colspan="3" class="px-6 py-3 text-sm font-bold text-teal-700 dark:text-teal-400">📥 スタッシュ</td>
+              <td colspan="3" class="px-6 py-3 text-sm font-bold text-teal-700 dark:text-teal-400">📥 <%= t('materials.categories.stash') %></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git stash</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">変更を一時保存</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git stash" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.stash') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git stash" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git stash pop</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">スタッシュを適用して削除</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git stash pop" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.stash_pop') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git stash pop" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
             <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
               <td class="px-6 py-3"><code class="font-mono text-sm text-indigo-600 dark:text-cyan-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">git stash list</code></td>
-              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300">スタッシュ一覧を表示</td>
-              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git stash list" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="コピー">📋</button></td>
+              <td class="px-6 py-3 text-sm text-slate-600 dark:text-slate-300"><%= t('materials.commands.stash_list') %></td>
+              <td class="px-4 py-3 text-center"><button data-action="click->clipboard#copy" data-clipboard-text="git stash list" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" title="<%= t('common.copy') %>">📋</button></td>
             </tr>
           </tbody>
         </table>
@@ -184,7 +184,7 @@
 
     <!-- コピー成功通知 -->
     <div data-clipboard-target="notification" class="fixed bottom-6 right-6 bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 text-sm font-medium">
-      ✓ コピーしました
+      ✓ <%= t('common.copied') %>
     </div>
   </div>
 </div>

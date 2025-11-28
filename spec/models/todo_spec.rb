@@ -12,7 +12,7 @@ RSpec.describe Todo, type: :model do
     it 'contentが空の場合は無効' do
       todo = Todo.new(content: '', user: user)
       expect(todo).not_to be_valid
-      expect(todo.errors[:content]).to include("can't be blank")
+      expect(todo.errors[:content]).to include("を入力してください")
     end
 
     it 'contentが500文字を超える場合は無効' do

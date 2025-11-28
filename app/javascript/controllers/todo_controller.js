@@ -5,103 +5,99 @@ export default class extends Controller {
   static targets = ["inputTodo", "incompleteLists", "completeLists"]
 
   connect() {
-    console.log("todo_controller connected")
-    this.loadTodos();
+    this.loadTodos()
   }
 
   addTodo() {
-    console.log("addTodo")
-    const inputTodo = this.inputTodoTarget.value;
-    console.log(inputTodo)
-    this.createIncompleteTodo(inputTodo);
-    this.inputTodoTarget.value = '';
-    this.saveTodos();
+    const inputTodo = this.inputTodoTarget.value
+    if (!inputTodo.trim()) return
+
+    this.createIncompleteTodo(inputTodo)
+    this.inputTodoTarget.value = ''
+    this.saveTodos()
   }
 
   createIncompleteTodo(todo) {
-    const li = document.createElement('li');
-    li.className = 'flex items-center justify-between';
+    const { li, div } = this.createTodoElement(todo)
 
-    const p = document.createElement('p');
-    p.className = 'flex-grow my-3';
-    p.innerText = todo;
+    const completeButton = this.createButton('Complete', 'bg-blue-300 hover:bg-blue-500', () => {
+      this.moveToComplete(li, div)
+    })
 
-    const div = document.createElement('div');
-    div.className = 'flex-shrink-0';
+    const deleteButton = this.createButton('Delete', 'bg-red-300 hover:bg-red-500', () => {
+      this.incompleteListsTarget.removeChild(li)
+      this.saveTodos()
+    })
 
-    const completeButton = document.createElement('button');
-    completeButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
-    completeButton.innerText = 'Complete';
-    completeButton.addEventListener('click', () => {
-      const moveTarget = completeButton.closest('li');
-      completeButton.nextElementSibling.remove();
-      completeButton.remove();
-      const backButton = document.createElement('button');
-      backButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
-      backButton.innerText = 'back';
-      backButton.addEventListener('click', () => {
-        const todoText = backButton.closest('li').querySelector('p').innerText;
-        this.createIncompleteTodo(todoText);
-        this.completeListsTarget.removeChild(backButton.closest('li'));
-      });
-      div.appendChild(backButton);
-      this.completeListsTarget.appendChild(moveTarget);
-      this.saveTodos();
-    });
+    div.appendChild(completeButton)
+    div.appendChild(deleteButton)
+    this.incompleteListsTarget.appendChild(li)
+  }
 
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'ml-2 px-4 py-1 bg-red-300 text-white rounded-md hover:bg-red-500';
-    deleteButton.innerText = 'Delete';
-    deleteButton.addEventListener('click', () => {
-      const deleteTarget = deleteButton.closest('li');
-      this.incompleteListsTarget.removeChild(deleteTarget);
-      this.saveTodos();
-    });
+  createCompleteTodo(todo) {
+    const { li, div } = this.createTodoElement(todo)
 
-    li.appendChild(p);
-    li.appendChild(div);
-    div.appendChild(completeButton);
-    div.appendChild(deleteButton);
-    this.incompleteListsTarget.appendChild(li);
+    const backButton = this.createBackButton(li)
+    div.appendChild(backButton)
+    this.completeListsTarget.appendChild(li)
+  }
+
+  createTodoElement(todo) {
+    const li = document.createElement('li')
+    li.className = 'flex items-center justify-between'
+
+    const p = document.createElement('p')
+    p.className = 'flex-grow my-3'
+    p.innerText = todo
+
+    const div = document.createElement('div')
+    div.className = 'flex-shrink-0'
+
+    li.appendChild(p)
+    li.appendChild(div)
+
+    return { li, p, div }
+  }
+
+  createButton(text, colorClass, onClick) {
+    const button = document.createElement('button')
+    button.className = `ml-2 px-4 py-1 ${colorClass} text-white rounded-md`
+    button.innerText = text
+    button.addEventListener('click', onClick)
+    return button
+  }
+
+  createBackButton(li) {
+    return this.createButton('back', 'bg-blue-300 hover:bg-blue-500', () => {
+      const todoText = li.querySelector('p').innerText
+      this.createIncompleteTodo(todoText)
+      this.completeListsTarget.removeChild(li)
+      this.saveTodos()
+    })
+  }
+
+  moveToComplete(li, div) {
+    // 既存のボタンを削除
+    div.innerHTML = ''
+
+    const backButton = this.createBackButton(li)
+    div.appendChild(backButton)
+    this.completeListsTarget.appendChild(li)
+    this.saveTodos()
   }
 
   saveTodos() {
-    const incompleteTodos = Array.from(this.incompleteListsTarget.children).map(li => li.querySelector('p').innerText);
-    const completeTodos = Array.from(this.completeListsTarget.children).map(li => li.querySelector('p').innerText);
-    localStorage.setItem('incompleteTodos', JSON.stringify(incompleteTodos));
-    localStorage.setItem('completeTodos', JSON.stringify(completeTodos));
+    const incompleteTodos = Array.from(this.incompleteListsTarget.children).map(li => li.querySelector('p').innerText)
+    const completeTodos = Array.from(this.completeListsTarget.children).map(li => li.querySelector('p').innerText)
+    localStorage.setItem('incompleteTodos', JSON.stringify(incompleteTodos))
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
   }
 
   loadTodos() {
-    const incompleteTodos = JSON.parse(localStorage.getItem('incompleteTodos')) || [];
-    const completeTodos = JSON.parse(localStorage.getItem('completeTodos')) || [];
+    const incompleteTodos = JSON.parse(localStorage.getItem('incompleteTodos')) || []
+    const completeTodos = JSON.parse(localStorage.getItem('completeTodos')) || []
 
-    incompleteTodos.forEach(todo => this.createIncompleteTodo(todo));
-    completeTodos.forEach(todo => {
-      const li = document.createElement('li');
-      li.className = 'flex items-center justify-between';
-
-      const p = document.createElement('p');
-      p.className = 'flex-grow my-3';
-      p.innerText = todo;
-
-      const div = document.createElement('div');
-      div.className = 'flex-shrink-0';
-
-      const backButton = document.createElement('button');
-      backButton.className = 'ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500';
-      backButton.innerText = 'back';
-      backButton.addEventListener('click', () => {
-        const todoText = backButton.closest('li').querySelector('p').innerText;
-        this.createIncompleteTodo(todoText);
-        this.completeListsTarget.removeChild(backButton.closest('li'));
-        this.saveTodos();
-      });
-
-      li.appendChild(p);
-      li.appendChild(div);
-      div.appendChild(backButton);
-      this.completeListsTarget.appendChild(li);
-    });
+    incompleteTodos.forEach(todo => this.createIncompleteTodo(todo))
+    completeTodos.forEach(todo => this.createCompleteTodo(todo))
   }
 }

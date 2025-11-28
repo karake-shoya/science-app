@@ -17,7 +17,9 @@
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
-            <img class="h-9 w-auto" src="<%= asset_path('header/azarashi.png') %>" alt="Science App">
+            <%= link_to root_path do %>
+              <img class="h-9 w-auto" src="<%= asset_path('header/azarashi.png') %>" alt="Science App">
+            <% end %>
           </div>
           <div class="hidden sm:ml-8 sm:block">
             <div class="flex space-x-1">

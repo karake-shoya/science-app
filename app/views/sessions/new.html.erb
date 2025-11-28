@@ -1,34 +1,43 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <% if alert = flash[:alert] %>
-  <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= alert %></p>
-  <% end %>
+<div class="min-h-[calc(100vh-64px)] bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4 py-12 transition-colors duration-300">
+  <div class="w-full max-w-md">
+    <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 p-8">
+      <!-- ロゴ・タイトル -->
+      <div class="text-center mb-8">
+        <img src="<%= asset_path('header/azarashi.png') %>" alt="ScienceApp Logo" class="w-16 h-16 mx-auto mb-4 rounded-full shadow-lg border-4 border-indigo-200 dark:border-cyan-700">
+        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">ログイン</h1>
+        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">アカウントにサインインしてください</p>
+      </div>
 
-  <% if notice = flash[:notice] %>
-  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+      <!-- フラッシュメッセージ -->
+      <% if alert = flash[:alert] %>
+        <div class="mb-6 p-4 bg-rose-50 dark:bg-rose-900/30 border border-rose-300 dark:border-rose-700 text-rose-700 dark:text-rose-300 rounded-xl text-sm font-medium" id="alert"><%= alert %></div>
+      <% end %>
+      <% if notice = flash[:notice] %>
+        <div class="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 rounded-xl text-sm font-medium" id="notice"><%= notice %></div>
+      <% end %>
 
-  <h1 class="font-bold text-4xl">Sign in</h1>
+      <!-- フォーム -->
+      <%= form_with url: session_url, class: "space-y-5" do |form| %>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">メールアドレス</label>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "example@email.com", value: params[:email_address], class: "block w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all text-sm" %>
+        </div>
 
-  <%= form_with url: session_url, class: "contents" do |form| %>
-  <div class="my-5">
-    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">パスワード</label>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "パスワードを入力", maxlength: 72, class: "block w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all text-sm" %>
+        </div>
 
-  <div class="my-5">
-    <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
+        <div class="pt-2">
+          <%= form.submit "ログイン", class: "w-full py-3 px-4 bg-indigo-500 dark:bg-cyan-600 hover:bg-indigo-600 dark:hover:bg-cyan-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 dark:shadow-cyan-500/30 transition-all duration-200 cursor-pointer text-sm tracking-wide" %>
+        </div>
+      <% end %>
 
-  <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-    <div class="inline">
-      <%= form.submit "Sign in", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+      <!-- リンク -->
+      <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700 space-y-3 text-center">
+        <%= link_to "パスワードをお忘れの方", new_password_path, class: "block text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors" %>
+        <%= link_to "新規登録はこちら", new_user_path, class: "block text-sm font-medium text-indigo-600 dark:text-cyan-400 hover:text-indigo-700 dark:hover:text-cyan-300 transition-colors" %>
+      </div>
     </div>
-
-    <div class="mt-4 text-sm text-gray-500 sm:mt-0">
-      <%= link_to "Forgot password?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
-    </div>
-    <div class="mt-4 text-sm text-gray-500 sm:mt-0">
-      <%= link_to "Click here for new registration", new_user_path, class: "text-gray-700 underline hover:no-underline" %>
-    </div>
   </div>
-  <% end %>
 </div>

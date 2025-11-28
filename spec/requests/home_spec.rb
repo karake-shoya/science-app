@@ -23,7 +23,7 @@ RSpec.describe "Home", type: :request do
   end
 
   describe "GET /dashboard" do
-    let(:user) { User.create!(email_address: "test@example.com", password: "password123") }
+    let(:user) { User.create!(email_address: "test@example.com", password: "Password123") }
 
     before do
       stub_const("ENV", ENV.to_hash.merge(
@@ -57,7 +57,7 @@ RSpec.describe "Home", type: :request do
 
         # signed cookieを設定するためにPOSTでログインする
         post session_path,
-          params: { email_address: user.email_address, password: "password123" },
+          params: { email_address: user.email_address, password: "Password123" },
           headers: { "HTTP_AUTHORIZATION" => basic_auth_credentials }
 
         get dashboard_path, headers: { "HTTP_AUTHORIZATION" => basic_auth_credentials }

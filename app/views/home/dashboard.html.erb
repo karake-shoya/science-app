@@ -1,24 +1,24 @@
 <div data-controller="dashboard">
   <div data-controller="todo">
-    <div class="bg-gray-600">
-      <div class="mx-auto bg-gray-200 min-h-screen" style="min-height: calc(100vh - 64px);">
-        <h1 class="p-2 text-2xl font-bold font-serif">Dashboard</h1>
+    <div class="bg-gray-600 dark:bg-gray-800">
+      <div class="mx-auto bg-gray-200 dark:bg-gray-900 min-h-screen" style="min-height: calc(100vh - 64px);">
+        <h1 class="p-2 text-2xl font-bold font-serif text-gray-900 dark:text-gray-100">Dashboard</h1>
 
         <div class="flex flex-row gap-16 justify-center items-stretch mx-auto min-h-full">
           <!-- 左カラム: 時間管理・Todo横並び、その下にメモ帳 -->
           <div class="flex flex-col w-full max-w-4xl min-h-full flex-1">
             <div class="flex flex-row gap-6 mb-6">
               <!-- 時間管理 -->
-              <div class="bg-white p-8 rounded-lg shadow-lg w-1/2">
-                <div class="flex flex-row text-center justify-center mb-6 text-2xl font-medium">
+              <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-1/2">
+                <div class="flex flex-row text-center justify-center mb-6 text-2xl font-medium text-gray-900 dark:text-gray-100">
                   <p class="m-2"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d (%A)') %></p>
                   <p class="m-2"><span id="current-time" class="font-mono" data-dashboard-target="currentTime"><%= Time.current.in_time_zone('Asia/Tokyo').strftime('%H:%M:%S') %></span></p>
                 </div>
                 <!-- 指定日からの経過日数・月日表示（指定日入力対応） -->
-                <div class="flex flex-col items-center mb-4 text-base text-gray-700">
+                <div class="flex flex-col items-center mb-4 text-base text-gray-700 dark:text-gray-300">
                   <form id="start-date-form" class="flex items-center mb-2" method="get">
                     <label for="start-date" class="mr-2">基準日：</label>
-                    <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || HomeHelper::DEFAULT_START_DATE %>" class="border rounded px-2 py-1" data-dashboard-target="startDateInput" onchange="this.form.submit()">
+                    <input type="date" id="start-date" name="start_date" value="<%= params[:start_date].presence || HomeHelper::DEFAULT_START_DATE %>" class="border rounded px-2 py-1 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" data-dashboard-target="startDateInput" onchange="this.form.submit()">
                   </form>
                   <% elapsed = elapsed_time_from_date(params[:start_date]) %>
                   <div>
@@ -28,25 +28,25 @@
                     <span class="ml-2"> <%= elapsed[:days_passed] %>日 (<%= elapsed[:months_passed] %>ヶ月と<%= elapsed[:day_of_month] %>日)</span>
                   </div>
                 </div>
-                <div class="my-5 text-gray-700 font-medium">
+                <div class="my-5 text-gray-700 dark:text-gray-300 font-medium">
                   <div class="flex items-center mb-4">
                     <label for="time-input" class="block mr-2">Input Starting time：</label>
-                    <input type="time" id="time-input" data-dashboard-target="timeInput" class="block w-32 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                    <button id="save-time" data-action="click->dashboard#saveInputTime" class="ml-2 px-4 py-1 bg-blue-300 text-white rounded-md hover:bg-blue-500">Save</button>
+                    <input type="time" id="time-input" data-dashboard-target="timeInput" class="block w-32 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <button id="save-time" data-action="click->dashboard#saveInputTime" class="ml-2 px-4 py-1 bg-blue-300 dark:bg-blue-600 text-white rounded-md hover:bg-blue-500 dark:hover:bg-blue-700">Save</button>
                   </div>
                   <div class="block mb-4">
                     <label for="time-display">Starting time：</label>
-                    <span id="starting-time" data-dashboard-target="startingTime" class="font-mono">--:--</span></p>
+                    <span id="starting-time" data-dashboard-target="startingTime" class="font-mono">--:--</span>
                   </div>
                   <div class="flex items-center mb-4">
                     <p>Finished time：<span id="end-time" data-dashboard-target="endTime" class="font-mono">--:--</span></p>
-                    <button type="button" class="ml-2 px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xs" data-action="click->dashboard#add30minToEndTime">
+                    <button type="button" class="ml-2 px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded hover:bg-gray-300 dark:hover:bg-gray-500 text-xs" data-action="click->dashboard#add30minToEndTime">
                       +30m
                     </button>
-                    <button type="button" class="ml-1 px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xs" data-action="click->dashboard#add1hToEndTime">
+                    <button type="button" class="ml-1 px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded hover:bg-gray-300 dark:hover:bg-gray-500 text-xs" data-action="click->dashboard#add1hToEndTime">
                       +1h
                     </button>
-                    <button type="button" class="ml-1 px-2 py-1 bg-red-200 rounded hover:bg-red-300 text-xs" data-action="click->dashboard#resetEndTimeOffset">
+                    <button type="button" class="ml-1 px-2 py-1 bg-red-200 dark:bg-red-700 rounded hover:bg-red-300 dark:hover:bg-red-600 text-xs" data-action="click->dashboard#resetEndTimeOffset">
                       Reset
                     </button>
                   </div>
@@ -58,50 +58,50 @@
                 </div>
               </div>
               <!-- Todoリスト -->
-              <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+              <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-1/2">
                 <!-- エラーメッセージ -->
-                <div data-todo-target="errorMessage" class="hidden mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                <div data-todo-target="errorMessage" class="hidden mb-4 p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg text-sm">
                 </div>
                 <!-- ローディング -->
                 <div data-todo-target="loading" class="hidden mb-4 text-center">
                   <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-                  <span class="ml-2 text-gray-600">読み込み中...</span>
+                  <span class="ml-2 text-gray-600 dark:text-gray-400">読み込み中...</span>
                 </div>
-                <div class="p-2 bg-blue-50 rounded-lg">
+                <div class="p-2 bg-blue-50 dark:bg-gray-700 rounded-lg">
                   <label for="hs-trailing-button-add-on" class="sr-only">Label</label>
                   <div class="flex rounded-lg">
-                    <input type="text" id="add-text" data-todo-target="inputTodo" name="hs-trailing-button-add-on" class="bg-white py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-s-lg sm:text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" data-action="keydown.enter->todo#addTodo">
+                    <input type="text" id="add-text" data-todo-target="inputTodo" name="hs-trailing-button-add-on" class="bg-white dark:bg-gray-600 dark:text-gray-100 py-2.5 sm:py-3 px-4 block w-full border-gray-200 dark:border-gray-500 rounded-s-lg sm:text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" data-action="keydown.enter->todo#addTodo">
                     <button id="add-button" type="button" data-action="todo#addTodo" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-e-md border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                       Add
                     </button>
                   </div>
                 </div>
-                <div class="my-5 p-8 rounded-lg shadow-lg w-full max-w-lg">
-                  <p class="text-center mb-2 text-xl font-semibold">Incomplete</p>
-                  <ul class="incomplete-lists" data-todo-target="incompleteLists">
+                <div class="my-5 p-8 rounded-lg shadow-lg w-full max-w-lg bg-gray-50 dark:bg-gray-700">
+                  <p class="text-center mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">Incomplete</p>
+                  <ul class="incomplete-lists text-gray-900 dark:text-gray-100" data-todo-target="incompleteLists">
                   </ul>
                 </div>
-                <div class="my-5 p-8 rounded-lg shadow-lg w-full max-w-lg">
-                  <p class="text-center mb-2 text-xl font-semibold">Complete</p>
-                  <ul class="complete-lists" data-todo-target="completeLists">
+                <div class="my-5 p-8 rounded-lg shadow-lg w-full max-w-lg bg-gray-50 dark:bg-gray-700">
+                  <p class="text-center mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">Complete</p>
+                  <ul class="complete-lists text-gray-900 dark:text-gray-100" data-todo-target="completeLists">
                   </ul>
                 </div>
               </div>
             </div>
             <!-- メモ帳 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <h2 class="text-xl font-semibold mb-2">memo</h2>
-              <textarea class="w-full h-40 border rounded p-2" placeholder="ここにメモを入力"></textarea>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">memo</h2>
+              <textarea class="w-full h-40 border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" placeholder="ここにメモを入力"></textarea>
             </div>
           </div>
           <!-- 右カラム: Qiitaトレンド -->
           <div class="w-full max-w-2xl min-h-full flex flex-col flex-1">
-            <div class="bg-white p-8 rounded-lg shadow-lg h-full flex flex-col justify-between">
-              <h2 class="text-xl font-semibold mb-2">Qiitaトレンド</h2>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg h-full flex flex-col justify-between">
+              <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Qiitaトレンド</h2>
               <ul>
                 <% @qiita_trends.each do |item| %>
                 <li class="mb-3">
-                  <a href="<%= item.respond_to?(:link) && item.link.respond_to?(:href) ? item.link.href : (item.respond_to?(:link) ? item.link.to_s : '') %>" target="_blank" class="text-green-600 hover:underline">
+                  <a href="<%= item.respond_to?(:link) && item.link.respond_to?(:href) ? item.link.href : (item.respond_to?(:link) ? item.link.to_s : '') %>" target="_blank" class="text-green-600 dark:text-green-400 hover:underline">
                     <%= item.title.respond_to?(:content) ? item.title.content : item.title.to_s %>
                   </a>
                 </li>

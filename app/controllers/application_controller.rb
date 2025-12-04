@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   include Pagy::Method
 
-  before_action :authenticate
+  before_action :authenticate, if: -> { Rails.env.production? }
 
   private
   def authenticate

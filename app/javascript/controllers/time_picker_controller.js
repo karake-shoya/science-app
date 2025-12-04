@@ -10,8 +10,18 @@ export default class extends Controller {
 
   connect() {
     this.isOpen = false
+    this.restoreFromStorage()
     this.updateDisplay()
     document.addEventListener('click', this.handleClickOutside.bind(this))
+  }
+
+  restoreFromStorage() {
+    const savedTime = localStorage.getItem('startingTime')
+    if (savedTime && savedTime !== "--:--") {
+      const [hour, minute] = savedTime.split(':').map(Number)
+      this.hourValue = hour
+      this.minuteValue = minute
+    }
   }
 
   disconnect() {

@@ -58,6 +58,7 @@ export default class extends Controller {
       this.constructor.STORAGE_KEYS.breakCheckbox,
       this.breakCheckboxTarget.checked
     )
+    this.updateTimeTracked()
   }
 
   // 終了時刻の調整
@@ -86,6 +87,8 @@ export default class extends Controller {
     if (savedTime && savedTime !== "--:--") {
       this.startingTimeTarget.textContent = savedTime
       this.timeInputTarget.value = savedTime
+      this.updateTimeTracked()
+      this.updateEndTime()
       this.startNotificationTimer(savedTime)
     }
   }

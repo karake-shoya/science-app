@@ -81,6 +81,7 @@ Rails.application.configure do
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   config.hosts << ".railway.app"
+  config.hosts << ".up.railway.app"
   config.hosts << ENV["RAILWAY_PUBLIC_DOMAIN"] if ENV["RAILWAY_PUBLIC_DOMAIN"].present?
 
   # Skip DNS rebinding protection for the default health check endpoint.

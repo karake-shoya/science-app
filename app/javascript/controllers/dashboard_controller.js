@@ -47,6 +47,8 @@ export default class extends Controller {
     const timeInput = this.timeInputTarget.value
     this.startingTimeTarget.textContent = timeInput
     localStorage.setItem(this.constructor.STORAGE_KEYS.startingTime, timeInput)
+    this.updateTimeTracked()
+    this.updateEndTime()
     this.startNotificationTimer(timeInput)
   }
 

@@ -86,9 +86,50 @@ export default class extends Controller {
     this.notifiedEndTime = false
 
     this.startingTime = startTime
+
+    // すでに経過した時間は通知済みとしてマーク（リロード時の重複通知を防ぐ）
+    this.markPastHoursAsNotified()
+
     this.notificationInterval = setInterval(() => {
       this.checkNotifications()
     }, 1000)
+  }
+
+  markPastHoursAsNotified() {
+    if (!this.startingTime) return
+
+    const [startHours, startMinutes] = this.startingTime.split(':').map(Number)
+    const startDate = new Date()
+    startDate.setHours(startHours, startMinutes, 0, 0)
+
+    const now = new Date()
+    let elapsedMs = now - startDate
+
+    const breakChecked = localStorage.getItem('breakCheckboxState') === 'true'
+    if (breakChecked) {
+      elapsedMs -= 60 * 60 * 1000
+    }
+
+    const elapsedMinutes = Math.floor(elapsedMs / (1000 * 60))
+
+    // すでに経過した時間を通知済みとしてマーク
+    for (let hour = 1; hour <= 8; hour++) {
+      const hourInMinutes = hour * 60
+      if (elapsedMinutes >= hourInMinutes) {
+        this.notifiedHours.add(hour)
+      }
+    }
+
+    // 終業関連の通知もチェック
+    const endTimeMinutes = 9 * 60
+    const tenMinBeforeEnd = endTimeMinutes - 10
+
+    if (elapsedMinutes >= tenMinBeforeEnd) {
+      this.notifiedTenMinBefore = true
+    }
+    if (elapsedMinutes >= endTimeMinutes) {
+      this.notifiedEndTime = true
+    }
   }
 
   stopNotificationTimer() {
@@ -106,15 +147,21 @@ export default class extends Controller {
     startDate.setHours(startHours, startMinutes, 0, 0)
 
     const now = new Date()
-    const elapsedMs = now - startDate
+    let elapsedMs = now - startDate
+
+    // 休憩時間を考慮（1時間引く）
+    const breakChecked = localStorage.getItem('breakCheckboxState') === 'true'
+    if (breakChecked) {
+      elapsedMs -= 60 * 60 * 1000
+    }
+
     const elapsedMinutes = Math.floor(elapsedMs / (1000 * 60))
-    const elapsedHours = Math.floor(elapsedMinutes / 60)
 
     for (let hour = 1; hour <= 8; hour++) {
       const hourInMinutes = hour * 60
       if (elapsedMinutes >= hourInMinutes && !this.notifiedHours.has(hour)) {
         this.notifiedHours.add(hour)
-        this.notify(`勤務開始から${hour}時間が経過しました`, "hourly", hour)
+        this.notify(`稼働時間${hour}時間が経過しました`, "hourly", hour)
       }
     }
 

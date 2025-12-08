@@ -1,5 +1,6 @@
-<div data-controller="notification dashboard" data-dashboard-notification-outlet="[data-controller~='notification']">
-  <div data-controller="todo">
+<div data-controller="notification">
+  <div data-controller="dashboard" data-dashboard-notification-outlet="[data-controller='notification']">
+    <div data-controller="todo">
     <!-- トースト通知 -->
     <div data-notification-target="toast" class="fixed top-20 right-4 z-50 p-4 rounded-xl shadow-lg border-2 bg-blue-50 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 transform translate-x-full opacity-0 transition-all duration-300 ease-out">
       <div class="flex items-center gap-3">
@@ -192,5 +193,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>

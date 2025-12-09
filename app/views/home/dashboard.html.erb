@@ -1,6 +1,5 @@
-<div data-controller="notification">
-  <div data-controller="dashboard" data-dashboard-notification-outlet="[data-controller='notification']">
-    <div data-controller="todo">
+<div data-controller="dashboard" data-dashboard-notification-outlet="[data-controller='notification']">
+  <div data-controller="notification">
     <!-- トースト通知 -->
     <div data-notification-target="toast" class="fixed top-20 right-4 z-50 p-4 rounded-xl shadow-lg border-2 bg-blue-50 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 transform translate-x-full opacity-0 transition-all duration-300 ease-out">
       <div class="flex items-center gap-3">
@@ -11,6 +10,9 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <div data-controller="todo">
     <div class="h-[calc(100vh-64px)] overflow-hidden bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
       <div class="mx-auto px-6 py-6">
         <div class="flex flex-row gap-6 justify-center items-stretch mx-auto min-h-full">
@@ -193,6 +195,5 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 </div>

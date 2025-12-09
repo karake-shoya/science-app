@@ -2,7 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["currentTime", "timeInput", "startingTime", "localTime", "timeTracked", "breakCheckbox", "endTime"]
-  static outlets = ["notification"]
+  // 通知コントローラが未接続でもエラーにしない（Turboリロード時の順序ズレ対策）
+  static outlets = ["notification?"]
 
   static STORAGE_KEYS = {
     startingTime: 'startingTime',

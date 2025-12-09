@@ -2,8 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["currentTime", "timeInput", "startingTime", "localTime", "timeTracked", "breakCheckbox", "endTime"]
-  // 通知コントローラが未接続でもエラーにしない（Turboリロード時の順序ズレ対策）
-  static outlets = ["notification?"]
+  static outlets = ["notification"]
 
   static STORAGE_KEYS = {
     startingTime: 'startingTime',
@@ -95,8 +94,28 @@ export default class extends Controller {
   }
 
   startNotificationTimer(startTime) {
-    if (this.hasNotificationOutlet) {
-      this.notificationOutlet.startNotificationTimer(startTime)
+    this.callNotificationOutlet((outlet) => outlet.startNotificationTimer(startTime))
+  }
+
+  callNotificationOutlet(callback) {
+    // Turboリロードなどで notification が未接続の場合に備えて安全に呼び出す
+    if (!this.hasNotificationOutlet) return
+
+    try {
+      const outlet = this.notificationOutlet
+      if (!outlet) return
+      callback(outlet)
+    } catch (error) {
+      // まだ接続途中の場合は次のタスクで再試行
+      setTimeout(() => {
+        try {
+          const outlet = this.notificationOutlet
+          if (!outlet) return
+          callback(outlet)
+        } catch (_) {
+          // 最終的に接続できない場合は黙って諦める
+        }
+      }, 0)
     }
   }
 

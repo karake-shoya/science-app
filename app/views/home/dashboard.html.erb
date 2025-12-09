@@ -10,11 +10,11 @@
         </button>
       </div>
     </div>
-  <div data-controller="todo">
+    <div data-controller="todo">
     <div class="h-[calc(100vh-64px)] overflow-hidden bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
       <div class="mx-auto px-6 py-6">
         <div class="flex flex-row gap-6 justify-center items-stretch mx-auto min-h-full">
-          <!-- 左カラム: 時間管理・Todo横並び、その下にメモ帳 -->
+          <!-- 左カラム: 時間管理・Todo横並び -->
           <div class="flex flex-col w-full max-w-4xl min-h-full flex-1 gap-6">
             <div class="flex flex-row gap-6">
               <!-- 時間管理 -->
@@ -169,11 +169,6 @@
                 </div>
               </div>
             </div>
-            <!-- メモ帳 -->
-            <div class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-shadow duration-300">
-              <h2 class="text-xl font-bold mb-4 text-slate-700 dark:text-slate-100 tracking-wide">📝 <%= t('dashboard.memo.title') %></h2>
-              <textarea class="w-full h-40 border border-slate-300 dark:border-slate-600 rounded-xl p-4 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-cyan-500 focus:border-transparent transition-all resize-none text-[15px] leading-relaxed" placeholder="<%= t('dashboard.memo.placeholder') %>"></textarea>
-            </div>
           </div>
           <!-- 右カラム: Qiitaトレンド -->
           <div class="w-full max-w-lg flex flex-col">
@@ -194,5 +189,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

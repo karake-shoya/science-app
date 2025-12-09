@@ -28,7 +28,11 @@ export default class extends Controller {
     }
   }
 
-  async addTodo() {
+  async addTodo(event) {
+    // 日本語入力中のEnter確定で追加されないようガード
+    if (event?.isComposing || event?.keyCode === 229) return
+    event?.preventDefault()
+
     const inputTodo = this.inputTodoTarget.value
     if (!inputTodo.trim()) {
       this.showError('TODOの内容を入力してください')

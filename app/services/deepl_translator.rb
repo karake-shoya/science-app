@@ -21,7 +21,6 @@ class DeeplTranslator
       response = perform_request(uri, request)
       parse_translation(response)
     end
-
     private
 
     def perform_request(uri, request)
@@ -49,4 +48,3 @@ class DeeplTranslator
     end
   end
 end
-

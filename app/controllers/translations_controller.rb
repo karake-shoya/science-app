@@ -4,7 +4,6 @@ class TranslationsController < ApplicationController
     if text.blank?
       return render json: { error: "テキストが空だよ。文字を入れてね。" }, status: :unprocessable_entity
     end
-
     target_lang = target_language_for(text)
     translated_text = DeeplTranslator.translate(text:, target_lang:)
 
@@ -30,4 +29,3 @@ class TranslationsController < ApplicationController
     japanese_pattern.match?(text) ? "EN" : "JA"
   end
 end
-

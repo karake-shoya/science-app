@@ -89,6 +89,11 @@ CLICKUP_LIST_ID=your_list_id
 CLICKUP_ASSIGNEE_ID=your_assignee_id
 CLICKUP_INCLUDE_TASK_ID=your_include_task_id
 
+# DeepL翻訳
+DEEPL_API_KEY=your_deepl_api_key
+# 有料版を使う場合は api.deepl.com に変更
+DEEPL_API_URL=https://api-free.deepl.com/v2/translate
+
 # データベース設定（本番環境）
 DATABASE_URL=postgresql://username:password@localhost/science_app_production
 ```

@@ -4,7 +4,7 @@
 
 ## 概要
 
-Science Appは、開発者や研究者の作業効率化を目的としたRailsアプリケーションです。ClickUp APIと連携した稼働時間分析、リアルタイムダッシュボード、学習教材の閲覧機能を提供します。
+Science Appは、開発者や研究者の作業効率化を目的としたRailsアプリケーションです。リアルタイムダッシュボード、学習教材の閲覧機能を提供します。
 
 ## 主な機能
 
@@ -15,13 +15,6 @@ Science Appは、開発者や研究者の作業効率化を目的としたRails�
 - **TODOリスト**: タスクの追加・完了・削除機能（ユーザーごとに管理）
 - **メモ機能**: フリーテキストのメモ入力
 - **Qiitaトレンド**: Qiitaの人気記事をリアルタイムで表示
-
-### 📈 アナリティクス
-- **ClickUp連携**: タスク一覧の表示と稼働時間の自動取得
-- **稼働時間分析**: 複数ユーザーの稼働時間計算と予測
-- **営業日計算**: 日本の祝日を考慮した営業日数の算出
-- **ユーザー動向**: 新規ユーザー登録のグラフ表示
-- **ユーザー管理**: 登録ユーザー一覧とページネーション
 
 ### 📚 学習教材
 - **チートシート**: プログラミング学習用のチートシート表示
@@ -40,7 +33,6 @@ Science Appは、開発者や研究者の作業効率化を目的としたRails�
 - **Charts**: Chartkick, Groupdate
 - **Pagination**: Pagy
 - **Authentication**: bcrypt
-- **API Integration**: ClickUp API (REST Client)
 - **External Data**: RSS (Qiitaトレンド), Holidays (日本の祝日)
 - **Background Jobs**: Solid Queue, Solid Cache, Solid Cable
 - **Testing**: RSpec, Capybara
@@ -81,14 +73,6 @@ bin/dev
 `.env`ファイルまたは環境変数に以下を設定してください：
 
 ```bash
-# ClickUp API設定
-CLICKUP_API_BASE_URL=https://api.clickup.com/api/v2
-CLICKUP_API_KEY=your_clickup_api_key
-CLICKUP_TEAM_ID=your_team_id
-CLICKUP_LIST_ID=your_list_id
-CLICKUP_ASSIGNEE_ID=your_assignee_id
-CLICKUP_INCLUDE_TASK_ID=your_include_task_id
-
 # DeepL翻訳
 DEEPL_API_KEY=your_deepl_api_key
 # 有料版を使う場合は api.deepl.com に変更
@@ -102,8 +86,7 @@ DATABASE_URL=postgresql://username:password@localhost/science_app_production
 
 1. **ユーザー登録**: `/session/new`でアカウント作成またはログイン
 2. **ダッシュボード**: `/dashboard`で時間管理・TODO管理・Qiitaトレンド確認
-3. **アナリティクス**: `/analytics`で稼働時間分析とClickUpデータ確認
-4. **学習教材**: `/materials`でプログラミングチートシート閲覧
+3. **学習教材**: `/materials`でプログラミングチートシート閲覧
 
 ## 開発
 
@@ -136,7 +119,6 @@ kamal deploy
 ## 設定ファイル
 
 - **認証設定**: `app/controllers/concerns/authentication.rb`
-- **ClickUp連携**: `app/models/clickup.rb`, `app/services/clickup_client.rb`
 - **稼働時間計算**: `app/services/working_hours_calculator.rb`
 - **ルーティング**: `config/routes.rb`
 - **タイムゾーン**: 東京時間に設定済み
@@ -146,7 +128,6 @@ kamal deploy
 - **users**: ユーザー情報（メールアドレス、名前、パスワード）
 - **sessions**: セッション管理（IPアドレス、ユーザーエージェント）
 - **todos**: TODOリスト（内容、完了状態、ユーザー紐付け）
-- **clickups**: ClickUp連携データ
 
 ## ライセンス
 

@@ -80,6 +80,7 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
+  config.hosts << "science-app-ltsx.onrender.com"
   config.hosts << ".railway.app"
   config.hosts << ".up.railway.app"
   config.hosts << ENV["RAILWAY_PUBLIC_DOMAIN"] if ENV["RAILWAY_PUBLIC_DOMAIN"].present?

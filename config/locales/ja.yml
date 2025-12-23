@@ -33,7 +33,6 @@ ja:
   header:
     dashboard: "ダッシュボード"
     materials: "教材"
-    analytics: "アナリティクス"
     my_page: "マイページ"
     logout: "ログアウト"
     toggle_theme: "テーマ切替"
@@ -46,7 +45,6 @@ ja:
       tagline: "時間管理とプロジェクト管理を支援する"
       tagline_sub: "Webアプリケーション"
       feature_time: "リアルタイムでの勤務時間・タスク管理"
-      feature_analytics: "ClickUp連携による稼働分析・アナリティクス"
       feature_materials: "学習教材・チートシートの閲覧"
       sign_up: "新規登録はこちら"
       sign_in: "ログインはこちら"

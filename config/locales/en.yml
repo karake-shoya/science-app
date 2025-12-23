@@ -14,7 +14,6 @@ en:
   header:
     dashboard: "Dashboard"
     materials: "Materials"
-    analytics: "Analytics"
     my_page: "My Page"
     logout: "Logout"
     toggle_theme: "Toggle theme"
@@ -27,7 +26,6 @@ en:
       tagline: "Web application for"
       tagline_sub: "time and project management"
       feature_time: "Real-time work hours and task management"
-      feature_analytics: "Work analysis with ClickUp integration"
       feature_materials: "Learning materials and cheat sheets"
       sign_up: "Sign up"
       sign_in: "Sign in"

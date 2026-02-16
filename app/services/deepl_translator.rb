@@ -26,6 +26,16 @@ class DeeplTranslator
     def perform_request(uri, request)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == "https"
+
+      if http.use_ssl?
+        store = OpenSSL::X509::Store.new
+        store.set_default_paths
+
+        # OpenSSL::X509::Store には flags= (setter) はありますが flags (getter) がないため、
+        # 直接 0 を代入して CRL チェックを無効化します。
+        store.flags = 0 if store.respond_to?(:flags=)
+        http.cert_store = store
+      end
       http.read_timeout = 5
       http.open_timeout = 5
 
